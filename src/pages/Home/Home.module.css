@@ -1,0 +1,11 @@
+.hero {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 650px) {
+  .hero {
+    gap: 24px;
+  }
+}
