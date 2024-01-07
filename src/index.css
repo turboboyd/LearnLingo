@@ -22,6 +22,8 @@ body {
   color: var(--dark-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif;
+
 }
 
 img {

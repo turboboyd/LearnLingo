@@ -1,6 +1,7 @@
 :root {
   --white-color: #ffffff;
   --dark-color: #121417;
+  --gray-color: #f8f8f8;
   --overlay-background: rgba(18, 20, 23, 0.5);
   --border-radius-btn: 12px;
   --border: 30px;

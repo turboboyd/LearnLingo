@@ -40,7 +40,7 @@ export default function Header() {
           </button>
         </li>
       </ul>
-      {!isModalOpen && (
+      {isModalOpen === true && (
         <BasicModal isModal={isModal}>
           <p>Your modal content goes here</p>
         </BasicModal>

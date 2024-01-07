@@ -1,0 +1,80 @@
+@media (min-width: 650px) {
+  .wrap_img {
+    position: relative;
+    width: 50%;
+    max-width: 568px;
+    max-height: 530px;
+    padding-bottom: 50%;
+    border-radius: var(--border);
+    overflow: hidden;
+  }
+  .wrap_img::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 60%;
+    height: 64%;
+    background-image: url('images/sticker.png');
+    background-size: 100% 100%;
+  }
+
+  .wrap_img::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 66%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 321px;
+    height: 254px;
+    background-size: 100% 100%;
+  }
+
+  .Yellow.wrap_img::before {
+    background-image: url('images/iMac/iMac\ =\ Yellow.svg');
+  }
+
+  .Orange.wrap_img::before {
+    background-image: url('images/iMac/iMac\ =\ Orange.svg');
+  }
+
+  .Green.wrap_img::before {
+    background-image: url('images/iMac/iMac\ =\ Green.svg');
+  }
+
+  .Blue.wrap_img::before {
+    background-image: url('images/iMac/iMac=Blue.svg');
+  }
+  .Red.wrap_img::before {
+    background-image: url('../../images/iMac/iMac\ =\ Red.svg');
+  }
+}
+
+@media (max-width: 1300px) {
+  .wrap_img {
+    padding-bottom: 50%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .wrap_img {
+    width: 568px;
+    height: 530px;
+    padding: 0;
+  }
+
+  .wrap_img::after {
+    top: 80px;
+    width: 339px;
+    height: 339px;
+    background-size: 100% 100%;
+  }
+
+  .wrap_img::before {
+    top: 354px;
+    width: 391px;
+    height: 304px;
+  }
+}
