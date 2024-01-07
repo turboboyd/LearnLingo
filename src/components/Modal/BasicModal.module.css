@@ -1,0 +1,30 @@
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-background);
+  z-index: 1200;
+  padding: 150px 0;
+  overflow-y: auto;
+}
+
+.modal {
+  position: relative;
+  margin: 0 auto;
+  /* border: 1px solid #ccc; */
+  width: 541px;
+  min-height: 752px;
+  border-radius: var(--border);
+  background-color: var(--white-color);
+  padding: 64px;
+}
+
+
+.modal
+
+.modal-overlay-active{
+  overflow: hidden;
+
+}
