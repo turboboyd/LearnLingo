@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HOME_ROUTE, TEACHERS_ROUTE, FAVORITES_ROUTE } from 'utils/const';
+import { HOME_ROUTE, TEACHERS_ROUTE, } from 'utils/const';
 import css from './Header.module.css';
 import BasicModal from 'components/Modal/BasicModal';
 import AuthModal from 'components/AuthModal/AuthModal';
 
 export default function Header() {
   const [modalContent, setModalContent] = useState(null);
-  const [isModalOpen, setModalOpen] = useState(false);
+  // const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = content => {
     setModalContent(content);
   };
-  const isModal = () => {
-    setModalOpen(!isModalOpen);
-  };
+  // const isModal = () => {
+  //   setModalOpen(!isModalOpen);
+  // };
 
   return (
     <header className={css.header}>
