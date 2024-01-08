@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HOME_ROUTE, TEACHERS_ROUTE, FAVORITES_ROUTE } from 'utils/const';
+import { HOME_ROUTE, TEACHERS_ROUTE, } from 'utils/const';
 import css from './Header.module.css';
 import BasicModal from 'components/Modal/BasicModal';
+import AuthModal from 'components/AuthModal/AuthModal';
 
 export default function Header() {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  // const [isModalOpen, setModalOpen] = useState(false);
 
-  const isModal = () => {
-    setModalOpen(!isModalOpen);
+  const openModal = content => {
+    setModalContent(content);
   };
+  // const isModal = () => {
+  //   setModalOpen(!isModalOpen);
+  // };
 
   return (
     <header className={css.header}>
@@ -30,19 +35,19 @@ export default function Header() {
 
       <ul className={css.list_btn}>
         <li>
-          <button className={css.btn_login} onClick={isModal}>
+          <button className={css.btn_login} onClick={() => openModal('login')}>
             Log in
           </button>
         </li>
         <li>
-          <button className={css.btn} onClick={isModal}>
+          <button className={css.btn} onClick={() => openModal('registration')}>
             Registration
           </button>
         </li>
       </ul>
-      {isModalOpen === true && (
-        <BasicModal isModal={isModal}>
-          <p>Your modal content goes here</p>
+      {modalContent && (
+        <BasicModal isModal={() => setModalContent(null)}>
+          <AuthModal modalContent={modalContent} />
         </BasicModal>
       )}
     </header>
