@@ -7,7 +7,7 @@ import HeroBackground from 'components/HeroBackground/HeroBackground';
 
 export default function Home() {
   const [randomStyle, setRandomStyle] = useState('');
-  console.log('randomStyle: ', randomStyle);
+
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * colors.length);

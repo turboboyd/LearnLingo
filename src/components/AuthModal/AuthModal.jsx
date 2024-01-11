@@ -1,9 +1,18 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { registrationSchema, loginSchema } from 'utils/validationSchemas';
-import { login, register } from 'utils/authFunctions';
-import css from './AuthModal.module.css'
+import { useDispatch } from 'react-redux';
+import css from './AuthModal.module.css';
+import {
+  registrationUser,
+  loginUser,
+  authorizationGoogle,
+} from '../../redux/auth/authOperation';
+import useAuth from 'hooks/useAuth';
+import { useEffect } from 'react';
 
-const AuthModal = ({ modalContent }) => {
+const AuthModal = ({ modalContent, isModal }) => {
+  const dispatch = useDispatch();
+  const { IsAuthCheck } = useAuth();
 
   const isLogin = modalContent === 'login';
   const initialValue = isLogin
@@ -16,21 +25,22 @@ const AuthModal = ({ modalContent }) => {
   const validSchema = isLogin ? loginSchema : registrationSchema;
   const btnTitle = isLogin ? 'Log In' : 'Sign Up';
 
-
   const onSubmit = async values => {
     if (isLogin) {
-      console.log('isLogin: ', isLogin);
-      const user = await login(values);
-      console.log(user);
+      await dispatch(loginUser(values));
     } else {
-            console.log('values: ', values);
-      const user = await register(values);
-
-      console.log(user);
+      await dispatch(registrationUser(values));
     }
   };
-
-
+  const handleLogin = async () => {
+    const resultAction = await dispatch(authorizationGoogle());
+    console.log('resultAction: ', resultAction);
+  };
+  useEffect(() => {
+    if (IsAuthCheck) {
+      isModal();
+    }
+  }, [IsAuthCheck, isModal]);
   return (
     <Formik
       className={css.form}
@@ -43,15 +53,21 @@ const AuthModal = ({ modalContent }) => {
           <h2 className={css.title}>{title}</h2>
           <p className={css.texta}>{text}</p>
           <div className={css.wrap}>
-           {!isLogin ? <div className={css.input_box}>
-              <Field
-                className={css.input}
-                type="text"
-                name="name"
-                placeholder="Name"
-              />
-              <ErrorMessage className={css.error} name="name" component="div" />
-            </div> : null}
+            {!isLogin ? (
+              <div className={css.input_box}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                />
+                <ErrorMessage
+                  className={css.error}
+                  name="name"
+                  component="div"
+                />
+              </div>
+            ) : null}
             <div className={css.input_box}>
               <Field
                 className={css.input}
@@ -82,6 +98,7 @@ const AuthModal = ({ modalContent }) => {
           <button className={css.btn} type="submit" disabled={isSubmitting}>
             {btnTitle}
           </button>
+          <button onClick={handleLogin}>Войти с помощью Google</button>
         </Form>
       )}
     </Formik>
