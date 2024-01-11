@@ -1,17 +1,18 @@
 import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
-console.log(process.env);
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCk-G4-bHktbOkPp0I6LxZNehY6V9pAasA',
-  authDomain: 'learnlingo-ccc63.firebaseapp.com',
-  projectId: 'learnlingo-ccc63',
-  storageBucket: 'learnlingo-ccc63.appspot.com',
-  messagingSenderId: '756189185901',
-  appId: '1:756189185901:web:e3b5a96cb2bd3a4cdffc64',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 export const app = initializeApp(firebaseConfig);
 
 
+export const auth = getAuth(app);
+// export firescore = 

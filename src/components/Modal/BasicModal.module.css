@@ -13,9 +13,7 @@
 .modal {
   position: relative;
   margin: 0 auto;
-  /* border: 1px solid #ccc; */
   width: 541px;
-  min-height: 752px;
   border-radius: var(--border);
   background-color: var(--white-color);
   padding: 64px;

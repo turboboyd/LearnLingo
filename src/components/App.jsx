@@ -1,11 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { currentUser } from '../redux/auth/authOperation';
 
 import Layout from './Layout/Layout';
 import Home from 'pages/Home/Home';
 import Teachers from 'pages/Teachers/Teachers';
 
-export const App = () => {
 
+
+export const App = () => {
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(currentUser());
+  }, [dispatch]);
   return (
     <>
       <Routes>
