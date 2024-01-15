@@ -1,5 +1,4 @@
 import css from './TeacherInfo.module.css';
-import sprite from '../../images/InlineSprite.svg';
 
 export default function TeacherInfo({ teacher }) {
   return (

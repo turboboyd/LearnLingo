@@ -41,21 +41,21 @@ export function useFavorites() {
     }
   };
 
-  const getFavorites = async () => {
-    const favoritesRef = ref(db, 'favorites/' + user.uid);
-    const snapshot = await get(favoritesRef);
-    if (snapshot.exists()) {
-      setFavorites(Object.values(snapshot.val()));
-    } else {
-      console.log('No data available');
-    }
-  };
+    useEffect(() => {
+      if (user) {
+        const getFavorites = async () => {
+          const favoritesRef = ref(db, 'favorites/' + user.uid);
+          const snapshot = await get(favoritesRef);
+          if (snapshot.exists()) {
+            setFavorites(Object.values(snapshot.val()));
+          } else {
+            console.log('Данные недоступны');
+          }
+        };
 
-  useEffect(() => {
-    if (user) {
-      getFavorites();
-    }
-  }, []);
-
+        getFavorites();
+      }
+    }, [user]);
+  
   return { favorites, addToFavorites, isFavoriteBtn };
 }
