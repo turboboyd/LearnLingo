@@ -29,7 +29,7 @@ const contactsInitialState = {
   token: '',
   isVerify: false,
   isAuthCheck: false,
-  isLoading: false,
+  isLoading: true,
   isRefreshing: false,
   error: null,
 };

@@ -1,0 +1,30 @@
+.name {
+  color: #121417;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+
+.teacher_info_text {
+  color: #121417;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.teacher_info_text p {
+  margin-bottom: 8px;
+}
+
+.teacher_info_text p:last-child {
+  margin-bottom: 0;
+}
+
+.speaks {
+  text-decoration-line: underline;
+}
+
+.servis_span {
+  color: #8a8a89;
+}
