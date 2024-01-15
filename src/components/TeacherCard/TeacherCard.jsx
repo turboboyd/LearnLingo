@@ -5,7 +5,8 @@ import Reviews from 'components/Reviews/Reviews';
 import TeacherInfo from 'components/TeacherInfo/TeacherInfo';
 import { useFavorites } from 'pages/Teachers/useFavorites';
 
-const TeacherCard = ({ teacher }) => {
+const TeacherCard = ({ teacher, randomStyle }) => {
+  console.log('randomStyle: ', randomStyle);
   const { addToFavorites, isFavoriteBtn } = useFavorites();
   const [expandedReviews, setExpandedReviews] = useState({});
   return (
@@ -47,10 +48,11 @@ const TeacherCard = ({ teacher }) => {
             onClick={() => addToFavorites(teacher)}
           >
             <svg
-              className={
+              className= {css.icon_heart}
+              style={
                 isFavoriteBtn(teacher)
-                  ? `${css.icon_heart} ${css.active}`
-                  : `${css.icon_heart}`
+                  ? { fill: randomStyle.btn, stroke: randomStyle.btn }
+                  : {}
               }
             >
               <use xlinkHref={`${sprite}#heart`} />
@@ -74,10 +76,7 @@ const TeacherCard = ({ teacher }) => {
         </div>
 
         {expandedReviews[teacher.id] && (
-          <button
-            className={css.btn}
-            type="button"
-          >
+          <button className={css.btn} type="button">
             Book trial lesson
           </button>
         )}

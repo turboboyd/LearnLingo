@@ -6,7 +6,7 @@ import Filter from 'components/Filter/Filter';
 import TeacherCard from 'components/TeacherCard/TeacherCard';
 import { fetchTeachers } from 'server/fetchTeachers';
 
-export default function Teachers() {
+export default function Teachers({ randomStyle }) {
   const [filteredTeachers, setFilteredTeachers] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,10 +54,14 @@ export default function Teachers() {
       />
       <div>
         {TeachersToShow.map(teacher => (
-          <TeacherCard teacher={teacher} key={teacher.id} />
+          <TeacherCard teacher={teacher} key={teacher.id} randomStyle={randomStyle} />
         ))}
 
-        <LoadMore hasMore={hasMore} loadMore={loadMore} />
+        <LoadMore
+          hasMore={hasMore}
+          loadMore={loadMore}
+          randomStyle={randomStyle}
+        />
       </div>
     </>
   );

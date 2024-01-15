@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import css from './Home.module.css';
-import { colors } from 'utils/colors';
 import HeroInfoList from 'components/HeroInfoList/HeroInfoList';
 import HeroTitleWrap from 'components/HeroTitleWrap/HeroTitleWrap';
 import HeroBackground from 'components/HeroBackground/HeroBackground';
 
-export default function Home() {
-  const [randomStyle, setRandomStyle] = useState('');
-
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    setRandomStyle(colors[randomIndex]);
-  }, []);
+export default function Home({randomStyle}) {
   return (
     <>
       <div className={css.hero}>

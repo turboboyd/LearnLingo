@@ -13,13 +13,13 @@ import {
 import { useFavorites } from 'pages/Teachers/useFavorites';
 import TeacherCard from 'components/TeacherCard/TeacherCard';
 
-export default function Favorites() {
-   const { favorites, addToFavorites, isFavoriteBtn } = useFavorites();
+export default function Favorites({randomStyle}) {
+  const { favorites, addToFavorites, isFavoriteBtn } = useFavorites();
 
   return (
     <div>
       {favorites.map(teacher => (
-        <TeacherCard teacher={teacher} key={teacher.id} />
+        <TeacherCard teacher={teacher} key={teacher.id} randomStyle={randomStyle}/>
       ))}
     </div>
   );
