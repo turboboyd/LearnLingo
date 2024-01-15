@@ -21,9 +21,9 @@ export default function Header() {
   //   setModalOpen(!isModalOpen);
   // };
 
-    const handleLogout = () => {
-      dispatch(logoutUser());
-    };
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <header className={css.header}>

@@ -1,7 +1,7 @@
 import css from './LoadMore.module.css';
 
 
-export default function LoadMore({hasMore, loadMore}) {
+export default function LoadMore({ hasMore, loadMore, randomStyle }) {
   return (
     <>
       {hasMore ? (
@@ -9,6 +9,7 @@ export default function LoadMore({hasMore, loadMore}) {
           className={`${css.btn} ${css.center}`}
           onClick={loadMore}
           type="button"
+          style={{ backgroundColor: randomStyle.btn }}
         >
           Load More
         </button>
