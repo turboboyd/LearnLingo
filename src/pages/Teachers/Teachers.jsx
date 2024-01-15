@@ -1,6 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import css from './Teachers.module.css';
-
 import LoadMore from 'components/Button/LoadMore';
 import Filter from 'components/Filter/Filter';
 import TeacherCard from 'components/TeacherCard/TeacherCard';
