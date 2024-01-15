@@ -6,7 +6,7 @@ import Loader from 'components/Loader/Loader';
 import Container from 'components/Container/Container';
 import useAuth from 'hooks/useAuth';
 export default function Layout() {
-  const { user, isLoading } = useAuth();
+  const { isLoading } = useAuth();
 
   if (isLoading) {
     return <div>Loading...</div>; // Или любой другой индикатор загрузки
