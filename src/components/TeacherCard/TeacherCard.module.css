@@ -1,0 +1,160 @@
+.wrap_teacher {
+  display: flex;
+  gap: 48px;
+  /* width: 100%; */
+  border-radius: 24px;
+  background: #fff;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  border: 3px solid #fbe9ba;
+  position: relative;
+}
+
+.avatar img {
+  position: relative;
+  display: block;
+  width: 96px;
+  height: 96px;
+  border-radius: 100px;
+}
+
+.avatar::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  border: solid white 2px;
+  background-color: var(--green-color);
+}
+
+.teacher_info {
+  width: 968px;
+}
+
+.teacher_wrap {
+  display: flex;
+  justify-content: space-between;
+  color: #121417;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.servis_span {
+  color: #8a8a89;
+}
+.teacher_statics {
+  display: flex;
+  gap: 16px;
+}
+.teacher_statics li {
+  display: flex;
+  align-items: center;
+}
+
+.static_after::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  margin-left: 16px;
+  background-color: rgba(18, 20, 23, 0.2);
+}
+
+/* .name {
+  color: #121417;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 32px;
+} */
+
+.level_wrap {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.level {
+  display: flex;
+  border-radius: 35px;
+  border: 1px solid rgba(18, 20, 23, 0.2);
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: #121417;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14;
+}
+
+.rating {
+  gap: 8px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.price {
+  color: var(--green-color);
+}
+/* .teacher_info_text {
+  color: #121417;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 16px;
+} */
+
+/* .teacher_info_text p {
+  margin-bottom: 8px;
+}
+
+.teacher_info_text p:last-child {
+  margin-bottom: 0;
+} */
+
+/* .speaks{
+    text-decoration-line: underline;
+} */
+
+.btn_heart {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background-color: transparent;
+}
+.icon_heart {
+  width: 100%;
+  height: 100%;
+  stroke: #121417;
+  fill: none;
+  transition: fill var(--transition), stroke var(--transition);
+}
+
+.icon_heart.active {
+  stroke: #f4c550;
+  fill: #f4c550;
+}
+
+.icon_book{
+  width: 16px;
+  height: 16px;
+  stroke: #000000;
+  fill: transparent;
+  margin-right: 8px;
+}

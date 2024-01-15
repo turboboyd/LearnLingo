@@ -5,4 +5,6 @@
   --overlay-background: rgba(18, 20, 23, 0.5);
   --border-radius-btn: 12px;
   --border: 30px;
+  --green-color: #38CD3E;
+  --transition: 0.3s ease;
 }
