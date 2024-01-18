@@ -5,10 +5,12 @@ import Reviews from 'components/Reviews/Reviews';
 import TeacherInfo from 'components/TeacherInfo/TeacherInfo';
 import { useFavorites } from 'pages/Teachers/useFavorites';
 
-const TeacherCard = ({ teacher, randomStyle }) => {
-  console.log('randomStyle: ', randomStyle);
+const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
+  selectedLevel = selectedLevel || teacher.levels[0];
+
   const { addToFavorites, isFavoriteBtn } = useFavorites();
   const [expandedReviews, setExpandedReviews] = useState({});
+
   return (
     <article className={css.wrap_teacher} key={teacher.id}>
       <figure className={css.avatar}>
@@ -48,7 +50,7 @@ const TeacherCard = ({ teacher, randomStyle }) => {
             onClick={() => addToFavorites(teacher)}
           >
             <svg
-              className= {css.icon_heart}
+              className={css.icon_heart}
               style={
                 isFavoriteBtn(teacher)
                   ? { fill: randomStyle.btn, stroke: randomStyle.btn }
@@ -69,7 +71,19 @@ const TeacherCard = ({ teacher, randomStyle }) => {
 
         <div className={css.level_wrap}>
           {teacher.levels.map((level, index) => (
-            <h3 className={css.level} key={index}>
+            <h3
+              className={css.level}
+              key={index}
+              type={level}
+              style={
+                level.toLowerCase() === selectedLevel.toLowerCase()
+                  ? {
+                      backgroundColor: randomStyle.btn,
+                      borderColor: randomStyle.btn,
+                    }
+                  : {}
+              }
+            >
               #{level}
             </h3>
           ))}

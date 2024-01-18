@@ -57,3 +57,16 @@ export const handleRejected = (state, { payload }) => {
   state.error = payload;
   state.status = 'rejected';
 };
+
+
+export const handleAuthorizationGoogle = (state, { payload }) => {
+  state.error = null;
+  state.user.displayName = payload.displayName;
+  state.user.email = payload.email;
+  state.user.uid = payload.uid;
+  state.token = payload.accessToken;
+  state.isLoading = false;
+  // state.isRefreshing = false;
+  state.isAuthCheck = true;
+  state.status = 'fulfilled';
+};

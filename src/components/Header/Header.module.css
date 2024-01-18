@@ -15,10 +15,12 @@
 .list_nav {
   display: flex;
   gap: 28px;
+  line-height: 1.25;
 }
 
 .list_btn {
   display: flex;
+  align-items: center;
   gap: 14px;
 }
 
@@ -42,4 +44,18 @@
   color: var(--white-color);
   font-weight: 700;
   line-height: 1.25;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.icon {
+  width: 28px;
+  height: 28px;
+}
+
+.name {
+    line-height: 1.25
 }

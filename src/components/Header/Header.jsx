@@ -7,6 +7,7 @@ import AuthModal from 'components/AuthModal/AuthModal';
 import useAuth from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/auth/authOperation';
+import sprite from 'images/InlineSprite.svg';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -27,8 +28,10 @@ export default function Header() {
 
   return (
     <header className={css.header}>
-      <Link to={HOME_ROUTE}>
-        <p>LOGO</p>
+      <Link className={css.logo} to={HOME_ROUTE}>
+        <svg className={css.icon}>
+          <use xlinkHref={`${sprite}#ukraine`} />
+        </svg>
         <p className={css.logo_title}>LearnLingo</p>
       </Link>
       <nav>
@@ -50,7 +53,7 @@ export default function Header() {
       </nav>
       {IsAuthCheck ? (
         <div className={css.list_btn}>
-          <p>Hallo {user.displayName}</p>{' '}
+          <p className={css.name}>Hallo {user.displayName}</p>{' '}
           <button className={css.btn} onClick={handleLogout}>
             logOut
           </button>

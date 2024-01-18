@@ -1,12 +1,20 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { registrationUser, loginUser, currentUser, logoutUser } from './authOperation';
+import {
+  registrationUser,
+  loginUser,
+  currentUser,
+  logoutUser,
+  authorizationGoogle,
+} from './authOperation';
 import {
   handleFulfilledRegistration,
   handleFulfilledLogin,
   handleFulfilledLogOut,
   handleFulfilledCurrentUser,
+  handleAuthorizationGoogle,
   handlePending,
   handleRejected,
+  
 //   handleFulfilledVerify,
 //   handleVerifyRejected,
 //   handleFulfilledUpdateProfileSettings,
@@ -43,8 +51,9 @@ export const authSlice = createSlice({
       .addCase(loginUser.fulfilled, handleFulfilledLogin)
       .addCase(logoutUser.fulfilled, handleFulfilledLogOut)
       .addCase(currentUser.fulfilled, handleFulfilledCurrentUser)
+      .addCase(authorizationGoogle.fulfilled, handleAuthorizationGoogle)
       // .addCase(refreshUser.pending, handlePendingRefresh)
-    //   .addCase(verifyUser.rejected, handleVerifyRejected)
+      //   .addCase(verifyUser.rejected, handleVerifyRejected)
       .addMatcher(isAnyOf(...operationsType('pending')), handlePending)
       .addMatcher(isAnyOf(...operationsType('rejected')), handleRejected);
   },
