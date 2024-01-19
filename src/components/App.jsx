@@ -8,6 +8,8 @@ import Home from 'pages/Home/Home';
 import Teachers from 'pages/Teachers/Teachers';
 import Favorites from 'pages/Favorites/Favorites';
 import { colors } from 'utils/colors';
+import PrivateRoute from './PrivateRoute';
+import AuthRoute from './AuthRoute';
 
 
 
@@ -26,12 +28,17 @@ export const App = () => {
       const randomIndex = Math.floor(Math.random() * colors.length);
       setRandomStyle(colors[randomIndex]);
     }, []);
-  
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index path="/" element={<Home randomStyle={randomStyle} />} />
+          <Route
+            index
+            path="/"
+            element={
+              <AuthRoute element={Home} randomStyle={randomStyle} />
+            }
+          />
           <Route
             index
             path="/teachers"
@@ -40,7 +47,9 @@ export const App = () => {
           <Route
             index
             path="/favorites"
-            element={<Favorites randomStyle={randomStyle} />}
+            element={
+              <PrivateRoute element={Favorites} randomStyle={randomStyle} />
+            }
           />
         </Route>
       </Routes>
