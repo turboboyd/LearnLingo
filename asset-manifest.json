@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/LearnLingo/static/css/main.0322e06b.css",
-    "main.js": "/LearnLingo/static/js/main.1d41d44b.js",
+    "main.css": "/LearnLingo/static/css/main.81aa8c86.css",
+    "main.js": "/LearnLingo/static/js/main.56acefff.js",
     "static/media/sticker.png": "/LearnLingo/static/media/sticker.9b8dc76fa337002d4fb5.png",
     "static/media/iMac = Green.svg": "/LearnLingo/static/media/iMac = Green.3358dc781b9d70f497c1.svg",
     "static/media/iMac = Orange.svg": "/LearnLingo/static/media/iMac = Orange.f6f436f87cec4603b851.svg",
     "static/media/iMac = Red.svg": "/LearnLingo/static/media/iMac = Red.a08296a2841f1440f3e9.svg",
     "static/media/iMac=Blue.svg": "/LearnLingo/static/media/iMac=Blue.bc70a5832f3ebc9f1f15.svg",
     "static/media/iMac = Yellow.svg": "/LearnLingo/static/media/iMac = Yellow.85bb9ab8d4b10631647b.svg",
-    "static/media/InlineSprite.svg": "/LearnLingo/static/media/InlineSprite.bbd251e5d3be0c224a1f474f3e377540.svg",
+    "static/media/InlineSprite.svg": "/LearnLingo/static/media/InlineSprite.e768d18b00d730b4c161a47e50102e2d.svg",
     "index.html": "/LearnLingo/index.html",
-    "main.0322e06b.css.map": "/LearnLingo/static/css/main.0322e06b.css.map",
-    "main.1d41d44b.js.map": "/LearnLingo/static/js/main.1d41d44b.js.map"
+    "main.81aa8c86.css.map": "/LearnLingo/static/css/main.81aa8c86.css.map",
+    "main.56acefff.js.map": "/LearnLingo/static/js/main.56acefff.js.map"
   },
   "entrypoints": [
-    "static/css/main.0322e06b.css",
-    "static/js/main.1d41d44b.js"
+    "static/css/main.81aa8c86.css",
+    "static/js/main.56acefff.js"
   ]
 }
