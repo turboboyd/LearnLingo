@@ -37,8 +37,8 @@
 }
 
 .error {
-    margin-top: 18px;
-    color: red;
+  margin-top: 18px;
+  color: red;
 }
 
 .error:last-child {
@@ -57,4 +57,25 @@
   border-radius: 12px;
   border: none;
   background: #f4c550;
+  margin-bottom: 24px;
+}
+
+.google_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 0;
+  gap: 14px;
+  color: #121417;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.56;
+  border-radius: 12px;
+  border: none;
+}
+
+.icon_google {
+  width: 30px;
+  height: 30px;
 }

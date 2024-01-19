@@ -1,8 +1,11 @@
+import AuthModal from 'components/AuthModal/AuthModal';
 import css from './HeroTitleWrap.module.css';
+import BasicModal from 'components/Modal/BasicModal';
+import useModal from 'hooks/useModal';
 
-
-
-export default function HeroTitleWrap({randomStyle}) {
+export default function HeroTitleWrap({ randomStyle }) {
+  const { isModalOpen, openModal, closeModal } = useModal();
+  
   return (
     <div className={css.wrap_title}>
       <h1 className={css.title}>
@@ -23,9 +26,15 @@ export default function HeroTitleWrap({randomStyle}) {
       <button
         className={`${css.btn} ${css[randomStyle.name]}`}
         style={{ backgroundColor: randomStyle.btn }}
+        onClick={openModal}
       >
         Get started
       </button>
+      {isModalOpen && (
+        <BasicModal isModal={closeModal}>
+          <AuthModal modalContent="registration" isModal={closeModal} />
+        </BasicModal>
+      )}
     </div>
   );
 }
