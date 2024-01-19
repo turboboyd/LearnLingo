@@ -22,3 +22,5 @@ jobs:
         with:
           branch: gh-pages
           folder: build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
