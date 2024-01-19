@@ -9,6 +9,7 @@ export default function Teachers({ randomStyle }) {
   const [teachers, setTeachers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [TeachersToShow, setTeachersToShow] = useState([]);
+  const [selectedLevel, setSelectedLevel] = useState('A1 Beginner');
 
   const itemsPerPage = 4;
 
@@ -49,10 +50,17 @@ export default function Teachers({ randomStyle }) {
         setTeachersToShow={setTeachersToShow}
         setCurrentPage={setCurrentPage}
         setHasMore={setHasMore}
+        selectedLevel={selectedLevel}
+        setSelectedLevel={setSelectedLevel}
       />
       <div>
         {TeachersToShow.map(teacher => (
-          <TeacherCard teacher={teacher} key={teacher.id} randomStyle={randomStyle} />
+          <TeacherCard
+            teacher={teacher}
+            key={teacher.id}
+            randomStyle={randomStyle}
+            selectedLevel={selectedLevel}
+          />
         ))}
 
         <LoadMore
