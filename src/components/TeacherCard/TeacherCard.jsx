@@ -7,6 +7,7 @@ import { useFavorites } from 'pages/Teachers/useFavorites';
 import useAuth from 'hooks/useAuth';
 import BasicModal from 'components/Modal/BasicModal';
 import AuthModal from 'components/AuthModal/AuthModal';
+import useModal from 'hooks/useModal';
 
 const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
   selectedLevel = selectedLevel || teacher.levels[0];
@@ -14,12 +15,12 @@ const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
   const { addToFavorites, isFavoriteBtn } = useFavorites();
   const [expandedReviews, setExpandedReviews] = useState({});
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isModalOpen, openModal, closeModal } = useModal();
   const handleAddToFavorites = () => {
     if (user.email) {
       addToFavorites(teacher);
     } else {
-      setIsModalOpen(true);
+     openModal()
     }
   };
   return (
@@ -107,11 +108,10 @@ const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
         )}
       </div>
       {isModalOpen && (
-        <BasicModal isModal={() => setIsModalOpen(false)}>
-          {/* Render the registration modal here */}
+        <BasicModal isModal={closeModal}>
           <AuthModal
             modalContent="registration"
-            isModal={() => setIsModalOpen(false)}
+            isModal={closeModal}
           />
         </BasicModal>
       )}

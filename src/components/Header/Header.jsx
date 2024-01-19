@@ -8,15 +8,12 @@ import useAuth from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/auth/authOperation';
 import sprite from 'images/InlineSprite.svg';
+import useModal from 'hooks/useModal';
 
 export default function Header() {
   const dispatch = useDispatch();
-  const [modalContent, setModalContent] = useState(null);
+  const { isModalOpen, modalContent, openModal, closeModal } = useModal();
   const { user, IsAuthCheck } = useAuth();
-
-  const openModal = content => {
-    setModalContent(content);
-  };
 
 
   const handleLogout = () => {
@@ -60,7 +57,8 @@ export default function Header() {
           <li>
             <button
               className={css.btn_login}
-              onClick={() => openModal('login')}
+              onClick={() => openModal('login')
+              }
             >
               Log in
             </button>
@@ -76,12 +74,9 @@ export default function Header() {
         </ul>
       )}
 
-      {modalContent && (
-        <BasicModal isModal={() => setModalContent(null)}>
-          <AuthModal
-            modalContent={modalContent}
-            isModal={() => setModalContent(null)}
-          />
+      {isModalOpen && (
+        <BasicModal isModal={closeModal}>
+          <AuthModal modalContent={modalContent} isModal={closeModal} />
         </BasicModal>
       )}
     </header>

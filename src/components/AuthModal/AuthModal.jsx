@@ -9,6 +9,8 @@ import {
 } from '../../redux/auth/authOperation';
 import useAuth from 'hooks/useAuth';
 import { useEffect } from 'react';
+import sprite from 'images/InlineSprite.svg';
+
 
 const AuthModal = ({ modalContent, isModal }) => {
   const dispatch = useDispatch();
@@ -98,7 +100,12 @@ const AuthModal = ({ modalContent, isModal }) => {
           <button className={css.btn} type="submit" disabled={isSubmitting}>
             {btnTitle}
           </button>
-          <button onClick={handleLogin}>Войти с помощью Google</button>
+          <button className={css.google_btn} onClick={handleLogin}>
+            <svg className={css.icon_google}>
+              <use xlinkHref={`${sprite}#google`} />
+            </svg>
+            Sign in with Google
+          </button>
         </Form>
       )}
     </Formik>
