@@ -4,13 +4,24 @@ import sprite from 'images/InlineSprite.svg';
 import Reviews from 'components/Reviews/Reviews';
 import TeacherInfo from 'components/TeacherInfo/TeacherInfo';
 import { useFavorites } from 'pages/Teachers/useFavorites';
+import useAuth from 'hooks/useAuth';
+import BasicModal from 'components/Modal/BasicModal';
+import AuthModal from 'components/AuthModal/AuthModal';
 
 const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
   selectedLevel = selectedLevel || teacher.levels[0];
-
+  const { user } = useAuth();
   const { addToFavorites, isFavoriteBtn } = useFavorites();
   const [expandedReviews, setExpandedReviews] = useState({});
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleAddToFavorites = () => {
+    if (user.email) {
+      addToFavorites(teacher);
+    } else {
+      setIsModalOpen(true);
+    }
+  };
   return (
     <article className={css.wrap_teacher} key={teacher.id}>
       <figure className={css.avatar}>
@@ -47,7 +58,7 @@ const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
           <button
             className={css.btn_heart}
             type="button"
-            onClick={() => addToFavorites(teacher)}
+            onClick={handleAddToFavorites}
           >
             <svg
               className={css.icon_heart}
@@ -95,6 +106,15 @@ const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
           </button>
         )}
       </div>
+      {isModalOpen && (
+        <BasicModal isModal={() => setIsModalOpen(false)}>
+          {/* Render the registration modal here */}
+          <AuthModal
+            modalContent="registration"
+            isModal={() => setIsModalOpen(false)}
+          />
+        </BasicModal>
+      )}
     </article>
   );
 };

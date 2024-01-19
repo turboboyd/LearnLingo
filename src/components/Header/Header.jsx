@@ -12,15 +12,12 @@ import sprite from 'images/InlineSprite.svg';
 export default function Header() {
   const dispatch = useDispatch();
   const [modalContent, setModalContent] = useState(null);
-  // const [isModalOpen, setModalOpen] = useState(false);
   const { user, IsAuthCheck } = useAuth();
 
   const openModal = content => {
     setModalContent(content);
   };
-  // const isModal = () => {
-  //   setModalOpen(!isModalOpen);
-  // };
+
 
   const handleLogout = () => {
     dispatch(logoutUser());
