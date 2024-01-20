@@ -1,5 +1,5 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { registrationSchema, loginSchema } from 'utils/validationSchemas';
+import { registrationSchema, loginSchema } from 'Form/Schema/validationSchemas';
 import { useDispatch } from 'react-redux';
 import css from './AuthModal.module.css';
 import {
@@ -10,6 +10,8 @@ import {
 import useAuth from 'hooks/useAuth';
 import { useEffect } from 'react';
 import sprite from 'images/InlineSprite.svg';
+import Title from 'Form/Title';
+import BtnForm from 'Form/BtnForm';
 
 
 const AuthModal = ({ modalContent, isModal }) => {
@@ -52,8 +54,8 @@ const AuthModal = ({ modalContent, isModal }) => {
     >
       {({ isSubmitting }) => (
         <Form>
-          <h2 className={css.title}>{title}</h2>
-          <p className={css.texta}>{text}</p>
+          <Title title={title} text={text} />
+
           <div className={css.wrap}>
             {!isLogin ? (
               <div className={css.input_box}>
@@ -97,9 +99,7 @@ const AuthModal = ({ modalContent, isModal }) => {
               />
             </div>
           </div>
-          <button className={css.btn} type="submit" disabled={isSubmitting}>
-            {btnTitle}
-          </button>
+          <BtnForm btnTitle={btnTitle} isSubmitting={isSubmitting} />
           <button className={css.google_btn} onClick={handleLogin}>
             <svg className={css.icon_google}>
               <use xlinkHref={`${sprite}#google`} />

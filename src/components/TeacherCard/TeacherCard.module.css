@@ -151,10 +151,20 @@
   fill: #f4c550;
 }
 
-.icon_book{
+.icon_book {
   width: 16px;
   height: 16px;
   stroke: #000000;
   fill: transparent;
   margin-right: 8px;
+}
+
+.btn {
+  border-radius: 12px;
+  padding: 16px 48px;
+  color: #121417;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.56;
+  border: transparent;
 }

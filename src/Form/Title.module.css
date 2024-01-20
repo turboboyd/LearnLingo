@@ -1,0 +1,11 @@
+.title_form {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+}
+
+.text {
+  color: rgba(18, 20, 23, 0.8);
+  line-height: 1.38;
+}

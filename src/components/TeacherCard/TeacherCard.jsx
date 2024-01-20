@@ -8,21 +8,22 @@ import useAuth from 'hooks/useAuth';
 import BasicModal from 'components/Modal/BasicModal';
 import AuthModal from 'components/AuthModal/AuthModal';
 import useModal from 'hooks/useModal';
+import TrialLessonModal from 'components/Modal/TrialLessonModal';
 
-const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
-  selectedLevel = selectedLevel || teacher.levels[0];
+const TeacherCard = ({ teacher, randomStyle, selectedLevel = teacher.levels[0] }) => {
   const { user } = useAuth();
   const { addToFavorites, isFavoriteBtn } = useFavorites();
   const [expandedReviews, setExpandedReviews] = useState({});
-
-    const { isModalOpen, openModal, closeModal } = useModal();
+  const { modalContent, isModalOpen, openModal, closeModal } = useModal();
+  
   const handleAddToFavorites = () => {
     if (user.email) {
       addToFavorites(teacher);
     } else {
-     openModal()
+      openModal('registration');
     }
   };
+
   return (
     <article className={css.wrap_teacher} key={teacher.id}>
       <figure className={css.avatar}>
@@ -102,17 +103,28 @@ const TeacherCard = ({ teacher, randomStyle, selectedLevel }) => {
         </div>
 
         {expandedReviews[teacher.id] && (
-          <button className={css.btn} type="button">
+          <button
+            className={css.btn}
+            type="button"
+            style={{ backgroundColor: randomStyle.btn }}
+            onClick={() => openModal('Book trial lesson')}
+          >
             Book trial lesson
           </button>
         )}
       </div>
       {isModalOpen && (
         <BasicModal isModal={closeModal}>
-          <AuthModal
-            modalContent="registration"
-            isModal={closeModal}
-          />
+          {modalContent === 'registration' && (
+            <AuthModal modalContent="registration" isModal={closeModal} />
+          )}
+          {modalContent === 'Book trial lesson' && (
+            <TrialLessonModal
+              closeModal={closeModal}
+              randomStyle={randomStyle}
+              teacher={teacher}
+            />
+          )}
         </BasicModal>
       )}
     </article>
