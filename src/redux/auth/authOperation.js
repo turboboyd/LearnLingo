@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { auth } from 'components/firebaseConfig';
+import { auth } from 'server/firebaseConfig';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -112,4 +112,3 @@ export const authorizationGoogle = createAsyncThunk(
     }
   }
 );
-

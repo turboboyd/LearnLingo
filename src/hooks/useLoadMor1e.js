@@ -7,7 +7,7 @@ import {
   limitToFirst,
   ref,
 } from 'firebase/database';
-import { db} from 'components/firebaseConfig.js';
+import { db } from 'server/firebaseConfig.js';
 
 const PAGE_SIZE = 4;
 
