@@ -1,7 +1,10 @@
 import css from './LoadMore.module.css';
+import { useSelector } from 'react-redux';
+import { selectRandomStyle } from '../../redux/auth/authSelectors';
 
 
-export default function LoadMore({ hasMore, loadMore, randomStyle }) {
+export default function LoadMore({ hasMore, loadMore }) {
+  const randomStyle = useSelector(selectRandomStyle);
   return (
     <>
       {hasMore ? (
@@ -14,7 +17,7 @@ export default function LoadMore({ hasMore, loadMore, randomStyle }) {
           Load More
         </button>
       ) : (
-        <p className={css.center}>Конец</p>
+        <p className={css.center}>The list of teachers is over.</p>
       )}
     </>
   );

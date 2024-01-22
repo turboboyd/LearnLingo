@@ -4,13 +4,16 @@ import Filter from 'components/Filter/Filter';
 import TeacherCard from 'components/TeacherCard/TeacherCard';
 import { fetchTeachers } from 'server/fetchTeachers';
 
-export default function Teachers({ randomStyle }) {
+export default function Teachers() {
   const [filteredTeachers, setFilteredTeachers] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [TeachersToShow, setTeachersToShow] = useState([]);
+  const [teachersToShow, setTeachersToShow] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState('A1 Beginner');
 
+  useEffect(() => {
+    fetchTeachers().then(teachers => setTeachers(teachers));
+  }, []);
   const itemsPerPage = 4;
 
   const [hasMore, setHasMore] = useState(true);
@@ -18,10 +21,6 @@ export default function Teachers({ randomStyle }) {
   const loadMore = useCallback(() => {
     setCurrentPage(currentPage + 1);
   }, [currentPage]);
-
-  useEffect(() => {
-    fetchTeachers().then(teachers => setTeachers(teachers));
-  }, []);
 
   useEffect(() => {
     const toShow = filteredTeachers.slice(
@@ -33,10 +32,6 @@ export default function Teachers({ randomStyle }) {
       setHasMore(false);
     }
   }, [filteredTeachers, currentPage]);
-
-  useEffect(() => {
-    fetchTeachers();
-  }, []);
 
   useEffect(() => {
     setFilteredTeachers(teachers);
@@ -54,20 +49,19 @@ export default function Teachers({ randomStyle }) {
         setSelectedLevel={setSelectedLevel}
       />
       <div>
-        {TeachersToShow.map(teacher => (
+        {teachersToShow.map(teacher => (
           <TeacherCard
             teacher={teacher}
             key={teacher.id}
-            randomStyle={randomStyle}
             selectedLevel={selectedLevel}
           />
         ))}
 
-        <LoadMore
-          hasMore={hasMore}
-          loadMore={loadMore}
-          randomStyle={randomStyle}
-        />
+        {teachersToShow.length > 0 ? (
+          <LoadMore hasMore={hasMore} loadMore={loadMore} />
+        ) : (
+          <p>We didn't find anything matching your request.</p>
+        )}
       </div>
     </>
   );

@@ -3,19 +3,22 @@ import css from './TeacherCard.module.css';
 import sprite from 'images/InlineSprite.svg';
 import Reviews from 'components/Reviews/Reviews';
 import TeacherInfo from 'components/TeacherInfo/TeacherInfo';
-import { useFavorites } from 'pages/Teachers/useFavorites';
+import { useFavorites } from 'hooks/useFavorites';
 import useAuth from 'hooks/useAuth';
 import BasicModal from 'components/Modal/BasicModal';
-import AuthModal from 'components/AuthModal/AuthModal';
+import AuthForm from 'components/Form/AuthForm/AuthModal';
 import useModal from 'hooks/useModal';
-import TrialLessonModal from 'components/Modal/TrialLessonModal';
+import { useSelector } from 'react-redux';
+import { selectRandomStyle } from '../../redux/auth/authSelectors';
+import TrialLessonForm from 'components/Form/TrialLessonForm/TrialLessonForm';
 
-const TeacherCard = ({ teacher, randomStyle, selectedLevel = teacher.levels[0] }) => {
+const TeacherCard = ({ teacher, selectedLevel = teacher.levels[0] }) => {
   const { user } = useAuth();
   const { addToFavorites, isFavoriteBtn } = useFavorites();
   const [expandedReviews, setExpandedReviews] = useState({});
   const { modalContent, isModalOpen, openModal, closeModal } = useModal();
-  
+  const randomStyle = useSelector(selectRandomStyle);
+
   const handleAddToFavorites = () => {
     if (user.email) {
       addToFavorites(teacher);
@@ -116,14 +119,10 @@ const TeacherCard = ({ teacher, randomStyle, selectedLevel = teacher.levels[0] }
       {isModalOpen && (
         <BasicModal isModal={closeModal}>
           {modalContent === 'registration' && (
-            <AuthModal modalContent="registration" isModal={closeModal} />
+            <AuthForm modalContent="registration" isModal={closeModal} />
           )}
           {modalContent === 'Book trial lesson' && (
-            <TrialLessonModal
-              closeModal={closeModal}
-              randomStyle={randomStyle}
-              teacher={teacher}
-            />
+            <TrialLessonForm closeModal={closeModal} teacher={teacher} />
           )}
         </BasicModal>
       )}

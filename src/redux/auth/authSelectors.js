@@ -5,6 +5,7 @@ export const selectError = state => state.auth.error;
 export const selectIsAuthCheck = state => state.auth.isAuthCheck;
 
 export const selectToken = state => state.auth.token;
+export const selectRandomStyle = state => state.auth.randomStyle;
 
 
 // export const selectIsVerify = state => state.auth.isVerify;

@@ -1,6 +1,6 @@
 
 import css from './Title.module.css';
-
+import PropTypes from 'prop-types';
 
 const Title = ({ title, text }) => {
   return (
@@ -10,4 +10,9 @@ const Title = ({ title, text }) => {
     </>
   );
 };
+Title.propTypes = {
+  title: PropTypes.string.isRequired, 
+  text: PropTypes.string.isRequired, 
+};
+
 export default Title;

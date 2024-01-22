@@ -1,14 +1,17 @@
 import css from './HeroInfoList.module.css';
-
+import { useSelector } from 'react-redux';
+import { selectRandomStyle } from '../../redux/auth/authSelectors';
 
 const infoListData = [
   { number: '32,000 +', text: 'Experienced tutors' },
   { number: '300,000 +', text: '5-star tutor reviews' },
   { number: '120 +', text: 'Subjects taught' },
   { number: '200 +', text: 'Tutor nationalities' },
-];
+]
 
-export default function HeroInfoList({randomStyle}) {
+
+export default function HeroInfoList() {
+  const randomStyle = useSelector(selectRandomStyle);
   return (
     <ul className={css.info_list} style={{ borderColor: randomStyle.btn }}>
       {infoListData.map((item, index) => (
