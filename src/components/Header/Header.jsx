@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FAVORITES_ROUTE, HOME_ROUTE, TEACHERS_ROUTE } from 'utils/const';
 import css from './Header.module.css';
 import BasicModal from 'components/Modal/BasicModal';
-import AuthModal from 'components/AuthModal/AuthModal';
+import AuthModal from 'components/Form/AuthForm/AuthModal';
 import useAuth from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/auth/authOperation';
@@ -13,7 +13,6 @@ export default function Header() {
   const dispatch = useDispatch();
   const { isModalOpen, modalContent, openModal, closeModal } = useModal();
   const { user, IsAuthCheck } = useAuth();
-
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -56,8 +55,7 @@ export default function Header() {
           <li>
             <button
               className={css.btn_login}
-              onClick={() => openModal('login')
-              }
+              onClick={() => openModal('login')}
             >
               Log in
             </button>

@@ -1,0 +1,15 @@
+.avatar {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 100px;
+}
+
+.wrap_teacher {
+  display: flex;
+  gap: 14px;
+}
+
+.wrap_teacher p {
+  margin-bottom: 4px;
+}

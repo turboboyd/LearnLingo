@@ -10,6 +10,8 @@ import Favorites from 'pages/Favorites/Favorites';
 import { colors } from 'utils/colors';
 import PrivateRoute from './PrivateRoute';
 import AuthRoute from './AuthRoute';
+import { authSlice } from '../redux/auth/authSlice';
+
 
 
 
@@ -17,17 +19,17 @@ import AuthRoute from './AuthRoute';
 
 export const App = () => {
   const dispatch = useDispatch();
+ const { setRandomStyle } = authSlice.actions;
 
   useEffect(() => {
     dispatch(currentUser());
   }, [dispatch]);
 
-    const [randomStyle, setRandomStyle] = useState('');
-
-    useEffect(() => {
-      const randomIndex = Math.floor(Math.random() * colors.length);
-      setRandomStyle(colors[randomIndex]);
-    }, []);
+  
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    dispatch(setRandomStyle(colors[randomIndex]));
+  }, [dispatch, setRandomStyle]);
   return (
     <>
       <Routes>
@@ -36,19 +38,19 @@ export const App = () => {
             index
             path="/"
             element={
-              <AuthRoute element={Home} randomStyle={randomStyle} />
+              <AuthRoute element={Home} />
             }
           />
           <Route
             index
             path="/teachers"
-            element={<Teachers randomStyle={randomStyle} />}
+            element={<Teachers />}
           />
           <Route
             index
             path="/favorites"
             element={
-              <PrivateRoute element={Favorites} randomStyle={randomStyle} />
+              <PrivateRoute element={Favorites} />
             }
           />
         </Route>

@@ -1,11 +1,13 @@
-import AuthModal from 'components/AuthModal/AuthModal';
+import AuthModal from 'components/Form/AuthForm/AuthModal';
 import css from './HeroTitleWrap.module.css';
 import BasicModal from 'components/Modal/BasicModal';
 import useModal from 'hooks/useModal';
+import { useSelector } from 'react-redux';
+import { selectRandomStyle } from '../../redux/auth/authSelectors';
 
-export default function HeroTitleWrap({ randomStyle }) {
+export default function HeroTitleWrap() {
   const { isModalOpen, openModal, closeModal } = useModal();
-  
+  const randomStyle = useSelector(selectRandomStyle);
   return (
     <div className={css.wrap_title}>
       <h1 className={css.title}>

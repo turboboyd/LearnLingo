@@ -40,11 +40,17 @@ const contactsInitialState = {
   isLoading: true,
   isRefreshing: false,
   error: null,
+  randomStyle: '',
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState: contactsInitialState,
+  reducers: {
+    setRandomStyle: (state, action) => {
+      state.randomStyle = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(registrationUser.fulfilled, handleFulfilledRegistration)
