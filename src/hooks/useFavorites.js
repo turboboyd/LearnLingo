@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { get, ref, update, remove } from 'firebase/database';
-import { auth, db } from 'components/firebaseConfig.js';
+import { auth, db } from 'server/firebaseConfig.js';
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState([]);
@@ -20,12 +20,11 @@ export function useFavorites() {
         return newFavorites;
       });
     } else {
-      console.log("ВОЙДИТЕ В СИСТЕМУ")
+      console.log('ВОЙДИТЕ В СИСТЕМУ');
     }
   };
 
   const getUpdatedFavorites = (prevFavorites, teacher) => {
-
     const favoritesRef = ref(db, 'favorites/' + user.uid);
 
     const isFavorited = prevFavorites.some(
@@ -41,21 +40,21 @@ export function useFavorites() {
     }
   };
 
-    useEffect(() => {
-      if (user) {
-        const getFavorites = async () => {
-          const favoritesRef = ref(db, 'favorites/' + user.uid);
-          const snapshot = await get(favoritesRef);
-          if (snapshot.exists()) {
-            setFavorites(Object.values(snapshot.val()));
-          } else {
-            console.log('Данные недоступны');
-          }
-        };
+  useEffect(() => {
+    if (user) {
+      const getFavorites = async () => {
+        const favoritesRef = ref(db, 'favorites/' + user.uid);
+        const snapshot = await get(favoritesRef);
+        if (snapshot.exists()) {
+          setFavorites(Object.values(snapshot.val()));
+        } else {
+          console.log('Данные недоступны');
+        }
+      };
 
-        getFavorites();
-      }
-    }, [user]);
-  
+      getFavorites();
+    }
+  }, [user]);
+
   return { favorites, addToFavorites, isFavoriteBtn };
 }

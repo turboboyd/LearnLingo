@@ -1,5 +1,5 @@
 import { get, query, orderByKey, ref } from 'firebase/database';
-import { db } from 'components/firebaseConfig.js';
+import { db } from 'server/firebaseConfig.js';
 
 export async function fetchTeachers() {
   const dbRef = ref(db, 'teachers/');
