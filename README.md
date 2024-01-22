@@ -5,7 +5,6 @@ LearnLingo is a language learning application that leverages modern web technolo
 - [Technologies](#Technologies)
 - [Development](#Development)
 - [Contributing](#contributing)
-- [To do](#to-do)
 - [Project Developer](#Project-Developer)
 
 ## TS und Design Mockup
@@ -49,7 +48,7 @@ Because I wanted to create something awesome!
 ## Project Developer
 - [Denis Daniv]
 Contact information for the project developer:
-- [Telegram] (https://t.me/turbo_boyd)
-- [LinkedIn] (https://www.linkedin.com/in/denis-daniv/)
+- [Telegram](https://t.me/turbo_boyd)
+- [LinkedIn](https://www.linkedin.com/in/denis-daniv/)
 - [WhatsApp]
 
