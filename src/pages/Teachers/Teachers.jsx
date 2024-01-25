@@ -3,6 +3,8 @@ import LoadMore from 'components/Button/LoadMore';
 import Filter from 'components/Filter/Filter';
 import TeacherCard from 'components/TeacherCard/TeacherCard';
 import { fetchTeachers } from 'server/fetchTeachers';
+import Section from 'components/Section/Section';
+import Container from 'components/Container/Container';
 
 export default function Teachers() {
   const [filteredTeachers, setFilteredTeachers] = useState([]);
@@ -38,31 +40,33 @@ export default function Teachers() {
   }, [teachers]);
 
   return (
-    <>
-      <Filter
-        teachers={teachers}
-        setFilteredTeachers={setFilteredTeachers}
-        setTeachersToShow={setTeachersToShow}
-        setCurrentPage={setCurrentPage}
-        setHasMore={setHasMore}
-        selectedLevel={selectedLevel}
-        setSelectedLevel={setSelectedLevel}
-      />
-      <div>
-        {teachersToShow.map(teacher => (
-          <TeacherCard
-            teacher={teacher}
-            key={teacher.id}
+      <Section>
+        <Container>
+          <Filter
+            teachers={teachers}
+            setFilteredTeachers={setFilteredTeachers}
+            setTeachersToShow={setTeachersToShow}
+            setCurrentPage={setCurrentPage}
+            setHasMore={setHasMore}
             selectedLevel={selectedLevel}
+            setSelectedLevel={setSelectedLevel}
           />
-        ))}
+          <div>
+            {teachersToShow.map(teacher => (
+              <TeacherCard
+                teacher={teacher}
+                key={teacher.id}
+                selectedLevel={selectedLevel}
+              />
+            ))}
 
-        {teachersToShow.length > 0 ? (
-          <LoadMore hasMore={hasMore} loadMore={loadMore} />
-        ) : (
-          <p>We didn't find anything matching your request.</p>
-        )}
-      </div>
-    </>
+            {teachersToShow.length > 0 ? (
+              <LoadMore hasMore={hasMore} loadMore={loadMore} />
+            ) : (
+              <p>We didn't find anything matching your request.</p>
+            )}
+          </div>
+        </Container>
+      </Section>
   );
 }
