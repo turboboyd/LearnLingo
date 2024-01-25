@@ -15,15 +15,11 @@ export default function Layout() {
   return (
     <>
       <Container>
-        <Header/>
+        <Header />
       </Container>
       <main>
         <Suspense fallback={<Loader />}>
-          {/* <Section isNotFoundPage={isNotFoundPage}> */}
-          <Container>
-            <Outlet/>
-          </Container>
-          {/* </Section> */}
+          <Outlet />
         </Suspense>
       </main>
     </>
