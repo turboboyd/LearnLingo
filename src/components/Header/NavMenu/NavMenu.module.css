@@ -1,0 +1,11 @@
+.list_nav {
+  display: flex;
+  gap: 28px;
+  line-height: 1.25;
+}
+
+@media (max-width: 500px) {
+  .list_nav {
+    gap: 8px;
+  }
+}

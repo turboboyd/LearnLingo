@@ -4,6 +4,7 @@ export const colors = [
     background: '#fbe9ba',
     btn: '#F4C550',
     image: '../images/iMac/iMac=Yellow.svg',
+    activeStyle: '#F4C550',
   },
   {
     name: 'Green',
@@ -14,7 +15,7 @@ export const colors = [
   {
     name: 'Blue',
     background: '#bfd6ea',
-    btn: "#9FB7CE",
+    btn: '#9FB7CE',
     image: '../images/iMac/iMac=Blue.svg',
   },
   {

@@ -12,39 +12,18 @@
   line-height: 1.2;
   letter-spacing: -0.4px;
 }
-.list_nav {
-  display: flex;
-  gap: 28px;
-  line-height: 1.25;
+
+
+@media (max-width: 500px) {
+  .header {
+    justify-content: space-between;
+  }
+  .logo_title {
+    font-size: 16px;
+  }
+
 }
 
-.list_btn {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.btn_login {
-  font-weight: 700;
-  line-height: 1.25;
-  border: none;
-  background: transparent;
-  padding: 14px 0;
-}
-
-.btn {
-  display: flex;
-  padding: 14px 39px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: var(--border-radius-btn);
-  border: none;
-  background: var(--dark-color);
-  color: var(--white-color);
-  font-weight: 700;
-  line-height: 1.25;
-}
 
 .logo {
   display: flex;
@@ -57,5 +36,6 @@
 }
 
 .name {
-    line-height: 1.25
+  line-height: 1.25;
 }
+

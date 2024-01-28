@@ -3,7 +3,7 @@ import {
   registrationSchema,
   loginSchema,
 } from 'components/Form/Schema/validationSchemas';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './AuthForm.module.css';
 import {
   registrationUser,
@@ -11,18 +11,19 @@ import {
   authorizationGoogle,
 } from '../../../redux/auth/authOperation';
 import useAuth from 'hooks/useAuth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Title from 'components/Form/Title/Title';
 import BtnForm from 'components/Form/BtnForm/BtnForm';
 import InputField from 'components/Form/InputField/InputField';
 import GoogleButton from 'components/Form/GoogleButton/GoogleButton';
 import PropTypes from 'prop-types';
+import { selectRandomStyle } from '../../../redux/auth/authSelectors';
 
 const AuthForm = ({ modalContent, isModal }) => {
   const dispatch = useDispatch();
+  const randomStyle = useSelector(selectRandomStyle);
   const { IsAuthCheck } = useAuth();
-
-  const isLogin = modalContent === 'login';
+  const [isLogin, setIsLogin] = useState(modalContent === 'login');
   const initialValue = isLogin
     ? { email: '', password: '' }
     : { name: '', email: '', password: '' };
@@ -49,6 +50,10 @@ const AuthForm = ({ modalContent, isModal }) => {
       isModal();
     }
   }, [IsAuthCheck, isModal]);
+
+  const toggleMode = () => {
+    setIsLogin(prev => !prev);
+  };
   return (
     <Formik
       className={css.form}
@@ -73,6 +78,18 @@ const AuthForm = ({ modalContent, isModal }) => {
               placeholder="Password"
             />
           </div>
+
+          <p className={css.text}>
+            {isLogin ? "You don't have an account" : 'I have an account'}{' '}
+            <span
+              style={{
+                color: randomStyle.btn,
+              }}
+              onClick={toggleMode}
+            >
+              {isLogin ? 'Sing Up' : 'Sing In'}
+            </span>
+          </p>
           <BtnForm btnTitle={btnTitle} isSubmitting={isSubmitting} />
           <GoogleButton handleLogin={handleLogin} />
         </Form>

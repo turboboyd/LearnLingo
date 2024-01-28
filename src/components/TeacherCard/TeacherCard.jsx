@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import css from './TeacherCard.module.css';
-import sprite from 'images/InlineSprite.svg';
+import {
+  TeacherAvatar,
+  TeacherStats,
+  TeacherLevels,
+  BookTrialLessonButton,
+} from './index';
+
 import Reviews from 'components/Reviews/Reviews';
 import TeacherInfo from 'components/TeacherInfo/TeacherInfo';
 import { useFavorites } from 'hooks/useFavorites';
@@ -29,54 +35,14 @@ const TeacherCard = ({ teacher, selectedLevel = teacher.levels[0] }) => {
 
   return (
     <article className={css.wrap_teacher} key={teacher.id}>
-      <figure className={css.avatar}>
-        <span></span>
-        <img src={teacher.avatar_url} alt="Avatar_teacher" />
-      </figure>
+      <TeacherAvatar teacher={teacher} />
       <div className={css.teacher_info}>
-        <div className={css.teacher_wrap}>
-          <span className={css.servis_span}>Languages</span>
-          <ul className={css.teacher_statics}>
-            <li className={css.static_after}>
-              <svg className={css.icon_book}>
-                <use xlinkHref={`${sprite}#book`} />
-              </svg>
-              <p>Lessons online</p>
-            </li>
-            <li className={css.static_after}>
-              <p>Lessons done: {teacher.lessons_done}</p>
-            </li>
-            <li className={`${css.rating} ${css.static_after}`}>
-              <svg className={css.icon}>
-                <use xlinkHref={`${sprite}#star`} />
-              </svg>
-              <p>Rating: {teacher.rating}</p>
-            </li>
-            <li>
-              {' '}
-              <p>
-                Price / 1 hour:{' '}
-                <span className={css.price}>{teacher.price_per_hour}$</span>
-              </p>
-            </li>
-          </ul>
-          <button
-            className={css.btn_heart}
-            type="button"
-            onClick={handleAddToFavorites}
-          >
-            <svg
-              className={css.icon_heart}
-              style={
-                isFavoriteBtn(teacher)
-                  ? { fill: randomStyle.btn, stroke: randomStyle.btn }
-                  : {}
-              }
-            >
-              <use xlinkHref={`${sprite}#heart`} />
-            </svg>
-          </button>
-        </div>
+        <TeacherStats
+          teacher={teacher}
+          isFavoriteBtn={isFavoriteBtn}
+          randomStyle={randomStyle}
+          handleAddToFavorites={handleAddToFavorites}
+        />
         <TeacherInfo teacher={teacher} />
         <Reviews
           reviews={teacher.reviews}
@@ -84,37 +50,16 @@ const TeacherCard = ({ teacher, selectedLevel = teacher.levels[0] }) => {
           expandedReviews={expandedReviews}
           setExpandedReviews={setExpandedReviews}
         />
-
-        <div className={css.level_wrap}>
-          {teacher.levels.map((level, index) => (
-            <h3
-              className={css.level}
-              key={index}
-              type={level}
-              style={
-                level.toLowerCase() === selectedLevel.toLowerCase()
-                  ? {
-                      backgroundColor: randomStyle.btn,
-                      borderColor: randomStyle.btn,
-                    }
-                  : {}
-              }
-            >
-              #{level}
-            </h3>
-          ))}
-        </div>
-
-        {expandedReviews[teacher.id] && (
-          <button
-            className={css.btn}
-            type="button"
-            style={{ backgroundColor: randomStyle.btn }}
-            onClick={() => openModal('Book trial lesson')}
-          >
-            Book trial lesson
-          </button>
-        )}
+        <TeacherLevels
+          teacher={teacher}
+          selectedLevel={selectedLevel}
+          randomStyle={randomStyle}
+        />
+        <BookTrialLessonButton
+          expanded={expandedReviews[teacher.id]}
+          randomStyle={randomStyle}
+          openModal={() => openModal('Book trial lesson')}
+        />
       </div>
       {isModalOpen && (
         <BasicModal isModal={closeModal}>
