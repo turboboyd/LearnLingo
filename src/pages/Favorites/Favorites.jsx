@@ -4,7 +4,7 @@ import { useLoadMore } from 'hooks/useLoadMore';
 import LoadMore from 'components/Button/LoadMore';
 import Section from 'components/Section/Section';
 import Container from 'components/Container/Container';
-import Loader from 'components/Loader/Loader';
+
 
 export default function Favorites() {
   const { favorites } = useFavorites();
