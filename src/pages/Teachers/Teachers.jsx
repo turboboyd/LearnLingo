@@ -42,7 +42,7 @@ export default function Teachers() {
   return (
     <Section>
       <Container>
-        {/* <Filter
+        <Filter
           teachers={teachers}
           setFilteredTeachers={setFilteredTeachers}
           setTeachersToShow={setTeachersToShow}
@@ -50,7 +50,7 @@ export default function Teachers() {
           setHasMore={setHasMore}
           selectedLevel={selectedLevel}
           setSelectedLevel={setSelectedLevel}
-        /> */}
+        />
         <div>
           {teachersToShow.map(teacher => (
             <TeacherCard
