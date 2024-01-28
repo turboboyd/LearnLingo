@@ -13,16 +13,23 @@
 .modal {
   position: relative;
   margin: 0 auto;
-  width: 541px;
+  max-width: 541px;
   border-radius: var(--border);
   background-color: var(--white-color);
   padding: 64px;
 }
 
-
-.modal
-
-.modal-overlay-active{
+.modal-overlay-active {
   overflow: hidden;
+}
 
+@media (max-width: 500px) {
+  .Overlay {
+    padding: 0;
+  }
+
+  .modal {
+    padding: 24px;
+    border-radius: 0;
+  }
 }

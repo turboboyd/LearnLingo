@@ -9,7 +9,7 @@ export default function Layout() {
   const { isLoading } = useAuth();
 
   if (isLoading) {
-    return <div>Loading...</div>; // Или любой другой индикатор загрузки
+    return <Loader/>;
   }
 
   return (

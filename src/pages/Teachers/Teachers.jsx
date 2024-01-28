@@ -40,33 +40,33 @@ export default function Teachers() {
   }, [teachers]);
 
   return (
-      <Section>
-        <Container>
-          <Filter
-            teachers={teachers}
-            setFilteredTeachers={setFilteredTeachers}
-            setTeachersToShow={setTeachersToShow}
-            setCurrentPage={setCurrentPage}
-            setHasMore={setHasMore}
-            selectedLevel={selectedLevel}
-            setSelectedLevel={setSelectedLevel}
+    <Section>
+      <Container>
+        {/* <Filter
+          teachers={teachers}
+          setFilteredTeachers={setFilteredTeachers}
+          setTeachersToShow={setTeachersToShow}
+          setCurrentPage={setCurrentPage}
+          setHasMore={setHasMore}
+          selectedLevel={selectedLevel}
+          setSelectedLevel={setSelectedLevel}
+        /> */}
+        <div>
+          {teachersToShow.map(teacher => (
+            <TeacherCard
+              teacher={teacher}
+              key={teacher.id}
+              selectedLevel={selectedLevel}
+            />
+          ))}
+          <LoadMore
+            hasMore={hasMore}
+            loadMore={loadMore}
+            teachersToShow={teachersToShow}
+            text="We didn't find anything matching your request."
           />
-          <div>
-            {teachersToShow.map(teacher => (
-              <TeacherCard
-                teacher={teacher}
-                key={teacher.id}
-                selectedLevel={selectedLevel}
-              />
-            ))}
-
-            {teachersToShow.length > 0 ? (
-              <LoadMore hasMore={hasMore} loadMore={loadMore} />
-            ) : (
-              <p>We didn't find anything matching your request.</p>
-            )}
-          </div>
-        </Container>
-      </Section>
+        </div>
+      </Container>
+    </Section>
   );
 }

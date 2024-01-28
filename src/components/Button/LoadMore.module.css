@@ -9,7 +9,12 @@
   background: #f4c550;
 }
 
-.center{
-    display: block;
-    margin: 0 auto;
+.center {
+  display: block;
+  margin: 0 auto;
+}
+
+.text {
+  line-height: 1.38;
+  text-align: center;
 }

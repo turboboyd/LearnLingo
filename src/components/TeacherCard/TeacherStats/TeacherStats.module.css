@@ -1,0 +1,78 @@
+.teacher_wrap {
+  display: flex;
+  justify-content: space-between;
+  color: #121417;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.servis_span {
+  color: #8a8a89;
+}
+
+.teacher_statics {
+  display: flex;
+  gap: 16px;
+}
+.teacher_statics li {
+  display: flex;
+  align-items: center;
+}
+
+.static_after::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  margin-left: 16px;
+  background-color: rgba(18, 20, 23, 0.2);
+}
+
+.rating {
+  gap: 8px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.price {
+  color: var(--green-color);
+}
+
+.btn_heart {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background-color: transparent;
+}
+.icon_heart {
+  width: 100%;
+  height: 100%;
+  stroke: #121417;
+  fill: none;
+  transition:
+    fill var(--transition),
+    stroke var(--transition);
+}
+
+.icon_heart.active {
+  stroke: #f4c550;
+  fill: #f4c550;
+}
+
+.icon_book {
+  width: 16px;
+  height: 16px;
+  stroke: #000000;
+  fill: transparent;
+  margin-right: 8px;
+}
+
+@media (max-width: 500px) {
+  .teacher_wrap {
+    flex-direction: column;
+  }
+}
