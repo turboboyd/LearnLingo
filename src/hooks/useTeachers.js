@@ -1,24 +1,23 @@
 import { useSelector } from 'react-redux';
 import {
-  selectFavorites,
+  selectTeachers,
   selectIsLoading,
   selectStatus,
   selectError,
-} from '../redux/favorite/favoriteSelectors';
+} from '../redux/teacher/teacherSelectors.js';
 
-
-const useFavorites = () => {
-  const favorites = useSelector(selectFavorites);
+const useTeachers = () => {
+  const teachers = useSelector(selectTeachers);
   const isLoading = useSelector(selectIsLoading);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
 
   return {
-    favorites,
+    teachers,
     isLoading,
     status,
     error,
   };
 };
 
-export default useFavorites;
+export default useTeachers;

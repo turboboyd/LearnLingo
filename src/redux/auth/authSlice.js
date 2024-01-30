@@ -27,7 +27,7 @@ import {
 import { operationsType } from './authOperationsType';
 
 
-const contactsInitialState = {
+const initialState = {
   user: {
     displayName: null,
     email: null,
@@ -45,7 +45,7 @@ const contactsInitialState = {
 
 export const authSlice = createSlice({
   name: 'auth',
-  initialState: contactsInitialState,
+  initialState,
   reducers: {
     setRandomStyle: (state, action) => {
       state.randomStyle = action.payload;
@@ -64,5 +64,8 @@ export const authSlice = createSlice({
       .addMatcher(isAnyOf(...operationsType('rejected')), handleRejected);
   },
 });
+
+
+
 
 export const authReducer = authSlice.reducer;

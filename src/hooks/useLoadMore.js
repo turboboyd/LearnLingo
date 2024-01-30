@@ -21,7 +21,7 @@ export function useLoadMore(teachers) {
     if (currentPage === Math.ceil(teachers.length / itemsPerPage)) {
       setHasMore(false);
     }
-  }, [teachers, currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage]);
 
   return {
     teachersToShow,
