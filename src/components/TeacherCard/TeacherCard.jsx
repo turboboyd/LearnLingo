@@ -9,7 +9,6 @@ import {
 
 import Reviews from 'components/Reviews/Reviews';
 import TeacherInfo from 'components/TeacherInfo/TeacherInfo';
-import { useFavorites } from 'hooks/useFavorites.1js';
 import useAuth from 'hooks/useAuth';
 import BasicModal from 'components/Modal/BasicModal';
 import AuthForm from 'components/Form/AuthForm/AuthModal';
