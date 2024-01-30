@@ -27,6 +27,11 @@ export default function Teachers() {
   useEffect(() => {
     setFilteredTeachers(teachers);
   }, [teachers]);
+
+
+  useEffect(() => {
+    dispatch(fetchTeachers());
+  }, [dispatch]);
   const {
     teachersToShow,
     hasMore,
@@ -35,11 +40,6 @@ export default function Teachers() {
     setHasMore,
     setCurrentPage,
   } = useLoadMore(filteredTeachers);
-
-  useEffect(() => {
-    dispatch(fetchTeachers());
-  }, [dispatch]);
-
   const user = auth.currentUser;
 
   const isFavoriteBtn = useCallback(
