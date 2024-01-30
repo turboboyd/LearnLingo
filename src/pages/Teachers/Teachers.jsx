@@ -2,43 +2,76 @@ import { useCallback, useEffect, useState } from 'react';
 import LoadMore from 'components/Button/LoadMore';
 import Filter from 'components/Filter/Filter';
 import TeacherCard from 'components/TeacherCard/TeacherCard';
-import { fetchTeachers } from 'server/fetchTeachers';
 import Section from 'components/Section/Section';
 import Container from 'components/Container/Container';
+import { ref, update, remove } from 'firebase/database';
+import { auth, db } from 'server/firebaseConfig.js';
+import { useDispatch } from 'react-redux';
+import { fetchTeachers } from '../../redux/teacher/teacherOperation';
+import { fetchFavorites } from '../../redux/favorite/favoriteOperation';
+import useTeachers from 'hooks/useTeachers';
+import { useLoadMore } from 'hooks/useLoadMore';
+import {
+  addFavorite,
+  removeFavorite,
+} from '../../redux/favorite/favoriteSlice';
+import useFavorites from 'hooks/useFavorites';
 
 export default function Teachers() {
-  const [filteredTeachers, setFilteredTeachers] = useState([]);
-  const [teachers, setTeachers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [teachersToShow, setTeachersToShow] = useState([]);
+  const dispatch = useDispatch();
+
+  const { teachers, status } = useTeachers();
+  const { favorites } = useFavorites();
+  const [filteredTeachers, setFilteredTeachers] = useState(teachers);
   const [selectedLevel, setSelectedLevel] = useState('A1 Beginner');
-
-  useEffect(() => {
-    fetchTeachers().then(teachers => setTeachers(teachers));
-  }, []);
-  const itemsPerPage = 4;
-
-  const [hasMore, setHasMore] = useState(true);
-
-  const loadMore = useCallback(() => {
-    setCurrentPage(currentPage + 1);
-  }, [currentPage]);
-
-  useEffect(() => {
-    const toShow = filteredTeachers.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
-    );
-    setTeachersToShow(prevData => [...prevData, ...toShow]);
-    if (currentPage === Math.ceil(filteredTeachers.length / itemsPerPage)) {
-      setHasMore(false);
-    }
-  }, [filteredTeachers, currentPage]);
-
   useEffect(() => {
     setFilteredTeachers(teachers);
   }, [teachers]);
+  const {
+    teachersToShow,
+    hasMore,
+    loadMore,
+    setTeachersToShow,
+    setHasMore,
+    setCurrentPage,
+  } = useLoadMore(filteredTeachers);
 
+  useEffect(() => {
+    dispatch(fetchTeachers());
+  }, [dispatch]);
+
+  const user = auth.currentUser;
+
+  const isFavoriteBtn = useCallback(
+    teacher => {
+      return favorites.some(favTeacher => favTeacher.id === teacher.id);
+    },
+    [favorites]
+  );
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchFavorites(user));
+    }
+  }, [user, dispatch]);
+
+  const updateFavorites = teacher => {
+    if (!user) {
+      console.log('ВОЙДИТЕ В СИСТЕМУ');
+      return;
+    }
+
+    const isFavorited = isFavoriteBtn(teacher);
+
+    if (isFavorited) {
+      remove(ref(db, 'favorites/' + user.uid + '/' + teacher.id));
+      dispatch(removeFavorite(teacher.id));
+    } else {
+      const favoritesRefBase = ref(db, 'favorites/' + user.uid);
+      update(favoritesRefBase, { [teacher.id]: teacher });
+      dispatch(addFavorite(teacher));
+    }
+  };
   return (
     <Section>
       <Container>
@@ -51,21 +84,25 @@ export default function Teachers() {
           selectedLevel={selectedLevel}
           setSelectedLevel={setSelectedLevel}
         />
-        <div>
-          {teachersToShow.map(teacher => (
-            <TeacherCard
-              teacher={teacher}
-              key={teacher.id}
-              selectedLevel={selectedLevel}
+        {status === 'fulfilled' && (
+          <div>
+            {teachersToShow.map(teacher => (
+              <TeacherCard
+                teacher={teacher}
+                key={teacher.id}
+                selectedLevel={selectedLevel}
+                isFavoriteBtn={isFavoriteBtn}
+                updateFavorites={updateFavorites}
+              />
+            ))}
+            <LoadMore
+              hasMore={hasMore}
+              loadMore={loadMore}
+              teachersToShow={teachersToShow}
+              text="We didn't find anything matching your request."
             />
-          ))}
-          <LoadMore
-            hasMore={hasMore}
-            loadMore={loadMore}
-            teachersToShow={teachersToShow}
-            text="We didn't find anything matching your request."
-          />
-        </div>
+          </div>
+        )}
       </Container>
     </Section>
   );
