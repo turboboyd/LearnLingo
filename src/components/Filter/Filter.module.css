@@ -1,4 +1,5 @@
-.filter{
-    display: flex;
-    gap: 20px;
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
