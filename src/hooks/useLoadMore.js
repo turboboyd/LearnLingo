@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useLoadMore(teachers) {
-    
+  const teachersRef = useRef(teachers);
   const [currentPage, setCurrentPage] = useState(1);
   const [teachersToShow, setTeachersToShow] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -13,12 +13,12 @@ export function useLoadMore(teachers) {
   }, [currentPage]);
 
   useEffect(() => {
-    const toShow = teachers.slice(
+    const toShow = teachersRef.slice(
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
     );
     setTeachersToShow(prevData => [...prevData, ...toShow]);
-    if (currentPage === Math.ceil(teachers.length / itemsPerPage)) {
+    if (currentPage === Math.ceil(teachersRef.length / itemsPerPage)) {
       setHasMore(false);
     }
   }, [currentPage, itemsPerPage]);
