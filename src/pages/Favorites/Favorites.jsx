@@ -1,6 +1,4 @@
 import TeacherCard from 'components/TeacherCard/TeacherCard';
-import { useLoadMore } from 'hooks/useLoadMore';
-import LoadMore from 'components/Button/LoadMore';
 import Section from 'components/Section/Section';
 import Container from 'components/Container/Container';
 import { useEffect, useCallback } from 'react';
@@ -52,8 +50,6 @@ export default function Favorites() {
     }
   };
 
-  const { teachersToShow, hasMore, loadMore } = useLoadMore(favorites);
-
   return (
     <Section>
       <Container>
@@ -65,12 +61,7 @@ export default function Favorites() {
             key={teacher.id}
           />
         ))}
-        <LoadMore
-          hasMore={hasMore}
-          loadMore={loadMore}
-          teachersToShow={teachersToShow}
-          text="Your Favorites List is empty"
-        />
+        <p>Your Favorites List is empty</p>
       </Container>
     </Section>
   );

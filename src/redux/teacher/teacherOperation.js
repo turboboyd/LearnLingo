@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { get, query, orderByKey, ref } from 'firebase/database';
 import { db } from 'server/firebaseConfig.js';
-import { setCache } from './teacherSlice';
 
 export const fetchTeachers = createAsyncThunk(
   'teachers/fetchTeachers',
