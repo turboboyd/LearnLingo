@@ -1,5 +1,6 @@
 .teacher_wrap {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   color: #121417;
   font-weight: 500;
@@ -13,6 +14,7 @@
 
 .teacher_statics {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
 }
 .teacher_statics li {
@@ -42,21 +44,7 @@
   color: var(--green-color);
 }
 
-.btn_heart {
-  width: 26px;
-  height: 26px;
-  border: none;
-  background-color: transparent;
-}
-.icon_heart {
-  width: 100%;
-  height: 100%;
-  stroke: #121417;
-  fill: none;
-  transition:
-    fill var(--transition),
-    stroke var(--transition);
-}
+
 
 .icon_heart.active {
   stroke: #f4c550;
@@ -70,9 +58,14 @@
   fill: transparent;
   margin-right: 8px;
 }
-
-@media (max-width: 500px) {
+.favorit_position{
+  display: block;
+}
+@media (max-width: 700px) {
   .teacher_wrap {
     flex-direction: column;
+  }
+  .favorit_position{
+    display: none;
   }
 }

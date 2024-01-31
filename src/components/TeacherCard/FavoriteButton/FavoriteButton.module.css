@@ -1,0 +1,15 @@
+.btn_heart {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background-color: transparent;
+}
+.icon_heart {
+  width: 100%;
+  height: 100%;
+  stroke: #121417;
+  fill: none;
+  transition:
+    fill var(--transition),
+    stroke var(--transition);
+}

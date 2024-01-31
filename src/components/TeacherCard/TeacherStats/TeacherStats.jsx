@@ -1,3 +1,4 @@
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import css from './TeacherStats.module.css';
 import sprite from 'images/InlineSprite.svg';
 
@@ -34,22 +35,13 @@ export const TeacherStats = ({
           </p>
         </li>
       </ul>
-      <button
-        className={css.btn_heart}
-        type="button"
-        onClick={handleAddToFavorites}
-      >
-        <svg
-          className={css.icon_heart}
-          style={
-            isFavoriteBtn(teacher)
-              ? { fill: randomStyle.btn, stroke: randomStyle.btn }
-              : {}
-          }
-        >
-          <use xlinkHref={`${sprite}#heart`} />
-        </svg>
-      </button>
+      <span className={css.favorit_position}>
+        <FavoriteButton
+          isFavorite={isFavoriteBtn(teacher)}
+          randomStyle={randomStyle}
+          handleAddToFavorites={handleAddToFavorites}
+        />
+      </span>
     </div>
   </div>
 );

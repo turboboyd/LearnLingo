@@ -1,37 +1,24 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoadMore from 'components/Button/LoadMore';
 import Filter from 'components/Filter/Filter';
 import TeacherCard from 'components/TeacherCard/TeacherCard';
 import Section from 'components/Section/Section';
 import Container from 'components/Container/Container';
-import { ref, update, remove } from 'firebase/database';
-import { auth, db } from 'server/firebaseConfig.js';
+import { auth} from 'server/firebaseConfig.js';
 import { useDispatch } from 'react-redux';
 import { fetchTeachers } from '../../redux/teacher/teacherOperation';
 import { fetchFavorites } from '../../redux/favorite/favoriteOperation';
 import useTeachers from 'hooks/useTeachers';
 import { useLoadMore } from 'hooks/useLoadMore';
-import {
-  addFavorite,
-  removeFavorite,
-} from '../../redux/favorite/favoriteSlice';
-import useFavorites from 'hooks/useFavorites';
+import useUpdateFavorites from 'hooks/useUpdateFavorites';
 
 export default function Teachers() {
   const dispatch = useDispatch();
-
+  const user = auth.currentUser;
+  const { updateFavorites, isFavoriteBtn } = useUpdateFavorites();
   const { teachers, status } = useTeachers();
-  const { favorites } = useFavorites();
   const [filteredTeachers, setFilteredTeachers] = useState(teachers);
   const [selectedLevel, setSelectedLevel] = useState('A1 Beginner');
-  useEffect(() => {
-    setFilteredTeachers(teachers);
-  }, [teachers]);
-
-
-  useEffect(() => {
-    dispatch(fetchTeachers());
-  }, [dispatch]);
   const {
     teachersToShow,
     hasMore,
@@ -40,14 +27,6 @@ export default function Teachers() {
     setHasMore,
     setCurrentPage,
   } = useLoadMore(filteredTeachers);
-  const user = auth.currentUser;
-
-  const isFavoriteBtn = useCallback(
-    teacher => {
-      return favorites.some(favTeacher => favTeacher.id === teacher.id);
-    },
-    [favorites]
-  );
 
   useEffect(() => {
     if (user) {
@@ -55,26 +34,18 @@ export default function Teachers() {
     }
   }, [user, dispatch]);
 
-  const updateFavorites = teacher => {
-    if (!user) {
-      console.log('ВОЙДИТЕ В СИСТЕМУ');
-      return;
-    }
+  useEffect(() => {
+    setFilteredTeachers(teachers);
+  }, [teachers]);
 
-    const isFavorited = isFavoriteBtn(teacher);
+  useEffect(() => {
+    dispatch(fetchTeachers());
+  }, [dispatch]);
 
-    if (isFavorited) {
-      remove(ref(db, 'favorites/' + user.uid + '/' + teacher.id));
-      dispatch(removeFavorite(teacher.id));
-    } else {
-      const favoritesRefBase = ref(db, 'favorites/' + user.uid);
-      update(favoritesRefBase, { [teacher.id]: teacher });
-      dispatch(addFavorite(teacher));
-    }
-  };
   return (
     <Section>
       <Container>
+        <h1>Teachers</h1>
         <Filter
           teachers={teachers}
           setFilteredTeachers={setFilteredTeachers}

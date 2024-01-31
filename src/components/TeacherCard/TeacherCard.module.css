@@ -1,5 +1,7 @@
 .wrap_teacher {
+  position: relative;
   display: flex;
+  justify-content: space-between;
   gap: 48px;
   max-width: 1184px;
   margin: 0 auto;
@@ -10,12 +12,20 @@
 }
 
 .teacher_info {
-  width: 100%;
+  width: 80%;
 }
-
-@media (max-width: 500px) {
+.favorit_position {
+  display: none;
+}
+@media (max-width: 700px) {
   .wrap_teacher {
     flex-direction: column;
     align-items: center;
+  }
+  .favorit_position {
+    position: absolute;
+    display: block;
+    top: 24px;
+    right: 24px;
   }
 }
