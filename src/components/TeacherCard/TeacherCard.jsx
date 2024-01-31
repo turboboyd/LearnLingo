@@ -16,6 +16,7 @@ import useModal from 'hooks/useModal';
 import { useSelector } from 'react-redux';
 import { selectRandomStyle } from '../../redux/auth/authSelectors';
 import TrialLessonForm from 'components/Form/TrialLessonForm/TrialLessonForm';
+import FavoriteButton from './FavoriteButton/FavoriteButton';
 
 const TeacherCard = ({
   teacher,
@@ -39,6 +40,13 @@ const TeacherCard = ({
   return (
     <article className={css.wrap_teacher} key={teacher.id}>
       <TeacherAvatar teacher={teacher} />
+      <span className={css.favorit_position}>
+        <FavoriteButton
+          isFavorite={isFavoriteBtn(teacher)}
+          randomStyle={randomStyle}
+          handleAddToFavorites={handleAddToFavorites}
+        />
+      </span>
       <div className={css.teacher_info}>
         <TeacherStats
           teacher={teacher}
