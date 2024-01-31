@@ -29,6 +29,14 @@
   padding: 16px 88px;
   border-radius: var(--border-radius-btn);
   border: none;
+  background-color: var(--color-btn);
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  background-color: var(--active-color-btn);
 }
 
 @media (min-width: 650px) {

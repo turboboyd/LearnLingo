@@ -27,7 +27,10 @@ export default function HeroTitleWrap() {
       </p>
       <button
         className={`${css.btn} ${css[randomStyle.name]}`}
-        style={{ backgroundColor: randomStyle.btn }}
+        style={{
+          '--color-btn': randomStyle.btn,
+          '--active-color-btn': randomStyle.background,
+        }}
         onClick={openModal}
       >
         Get started

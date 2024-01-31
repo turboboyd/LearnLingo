@@ -15,7 +15,10 @@ export default function LoadMore({ hasMore, loadMore, teachersToShow, text }) {
               className={`${css.btn} ${css.center}`}
               onClick={loadMore}
               type="button"
-              style={{ backgroundColor: randomStyle.btn }}
+              style={{
+                '--color-btn': randomStyle.btn,
+                '--active-color-btn': randomStyle.background,
+              }}
             >
               Load More
             </button>

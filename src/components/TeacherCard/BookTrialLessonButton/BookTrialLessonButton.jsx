@@ -5,8 +5,8 @@ export const BookTrialLessonButton = ({ expanded, randomStyle, openModal }) =>
       className={css.btn}
       type="button"
       style={{
-        backgroundColor: randomStyle.btn,
-        '--active-color': 'red',
+        '--color-btn': randomStyle.btn,
+        '--active-color-btn': randomStyle.background,
       }}
       onClick={openModal}
     >
