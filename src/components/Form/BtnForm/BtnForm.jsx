@@ -8,7 +8,8 @@ const BtnForm = ({ btnTitle, isSubmitting }) => {
   return (
     <button
       style={{
-        backgroundColor: randomStyle.btn,
+        '--color-btn': randomStyle.btn,
+        '--active-color-btn': randomStyle.background,
       }}
       className={css.btn}
       type="submit"
