@@ -54,6 +54,7 @@ export const customStyles = randomStyle => ({
     ...provided,
     width: 198,
     borderRadius: 12,
+    marginTop: 0,
   }),
   menuList: (provided, state) => ({
     ...provided,
