@@ -1,6 +1,13 @@
 import { useState } from 'react';
-import { languages, levels } from './DataFlter';
+import { languages, levels, prices } from './DataFlter';
 import css from './Filter.module.css';
+
+import Select from 'react-select';
+import { selectRandomStyle } from '../../redux/auth/authSelectors';
+import { useSelector } from 'react-redux';
+import { customStyles } from './customStyles';
+import { useFilter } from 'hooks/useFilter';
+
 export default function Filter({
   teachers,
   setFilteredTeachers,
@@ -10,103 +17,81 @@ export default function Filter({
   selectedLevel,
   setSelectedLevel,
 }) {
-  const [selectedLanguage, setSelectedLanguage] = useState('');
-  const [selectedPrice, setSelectedPrice] = useState('');
+  const randomStyle = useSelector(selectRandomStyle);
 
-  const filterTeachers = async (language, level, price) => {
-    setTeachersToShow([]);
-    setCurrentPage(1);
-    setHasMore(true);
-    let filterData = teachers;
-    if (language) {
-      filterData = filterByLanguage(filterData, language);
-    }
-    if (level) {
-      filterData = filterByLevel(filterData, level);
-    }
-    if (price) {
-      filterData = filterByPrice(filterData, price);
-    }
-    setFilteredTeachers(filterData);
-  };
-
-  const filterByLanguage = (teachers, language) => {
-    return teachers.filter(teacher => teacher.languages.includes(language));
-  };
-
-  const filterByLevel = (teachers, level) => {
-    return teachers.filter(teacher => teacher.levels.includes(level));
-  };
-
-  const filterByPrice = (teachers, price) => {
-    return teachers.filter(teacher => teacher.price_per_hour === Number(price));
-  };
-
+  const {
+    selectedLanguage,
+    setSelectedLanguage,
+    selectedPrice,
+    setSelectedPrice,
+    filterTeachers,
+  } = useFilter(
+    teachers,
+    setTeachersToShow,
+    setCurrentPage,
+    setHasMore,
+    setFilteredTeachers,
+    selectedLevel,
+    setSelectedLevel
+    );
+  
   const handleSelectLanguage = e => {
-    const newLanguage = e.target.value;
+    const newLanguage = e.value;
     setSelectedLanguage(newLanguage);
     filterTeachers(newLanguage, selectedLevel, selectedPrice);
   };
   const handleSelectLevel = e => {
-    const newLevel = e.target.value;
+    const newLevel = e.value;
     setSelectedLevel(newLevel);
     filterTeachers(selectedLanguage, newLevel, selectedPrice);
   };
 
   const handleSelectPrice = e => {
-    const newPrice = e.target.value;
+    const newPrice = e.value;
     setSelectedPrice(newPrice);
     filterTeachers(selectedLanguage, selectedLevel, newPrice);
   };
 
   return (
-    <>
-      <ul className={css.filter}>
-        <li>
-          Languages
-          <select
-            name="language"
-            value={selectedLanguage}
-            onChange={handleSelectLanguage}
-          >
-            <option value="">Any</option>
-            {languages.map((level, i) => (
-              <option key={i} value={level}>
-                {level}
-              </option>
-            ))}
-          </select>
-        </li>
-        <li>
-          Level of knowledge
-          <select
-            name="level"
-            value={selectedLevel}
-            onChange={handleSelectLevel}
-          >
-            {levels.map((level, i) => (
-              <option key={i} value={level}>
-                {level}
-              </option>
-            ))}
-          </select>
-        </li>
-        <li>
-          Price
-          <select
-            name="price"
-            value={selectedPrice}
-            onChange={handleSelectPrice}
-          >
-            <option value="">Any</option>
-            {Array.from({ length: 11 }, (_, i) => i + 25).map((price, i) => (
-              <option key={i} value={price}>
-                {price} $
-              </option>
-            ))}
-          </select>
-        </li>
-      </ul>
-    </>
+    <div className={css.filter}>
+      <div className="">
+        <label htmlFor="levels">Level of knowledge</label>
+        <Select
+          aria-label="Level of knowledge"
+          className={css.levels}
+          styles={customStyles(randomStyle)}
+          defaultValue={levels[0]}
+          onChange={handleSelectLevel}
+          name="levels"
+          options={levels}
+          isSearchable={false}
+        />
+      </div>
+      <div className="">
+        <label htmlFor="languages">Languages</label>
+        <Select
+          aria-label="Languages"
+          className={css.levels}
+          styles={customStyles(randomStyle)}
+          defaultValue={languages[0]}
+          onChange={handleSelectLanguage}
+          name="languages"
+          options={languages}
+          isSearchable={false}
+        />
+      </div>
+      <div>
+        <label htmlFor="price">Price</label>
+        <Select
+          aria-label="Price"
+          isSearchable={false}
+          defaultValue={prices[0]}
+          styles={customStyles(randomStyle)}
+          name="price"
+          options={prices}
+          onChange={handleSelectPrice}
+        />
+      </div>
+    </div>
   );
 }
