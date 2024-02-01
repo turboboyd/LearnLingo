@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { languages, levels, prices } from './DataFlter';
 import css from './Filter.module.css';
 
