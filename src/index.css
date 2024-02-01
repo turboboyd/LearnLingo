@@ -19,8 +19,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  
-  color: var(--dark-color) !important;
+
+  color: var(--dark-color, #121417);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Roboto', sans-serif;
