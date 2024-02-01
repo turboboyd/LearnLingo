@@ -55,6 +55,8 @@ export const customStyles = randomStyle => ({
     width: 198,
     borderRadius: 12,
     marginTop: 0,
+    overflow: 'hidden',
+    padding: "4px 0",
   }),
   menuList: (provided, state) => ({
     ...provided,
