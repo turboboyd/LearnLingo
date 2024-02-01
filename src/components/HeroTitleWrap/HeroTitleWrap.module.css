@@ -31,6 +31,9 @@
   border: none;
   background-color: var(--color-btn);
   transition: background-color 0.3s ease;
+    -webkit-border-radius: var(--border-radius-btn);
+  -moz-border-radius: var(--border-radius-btn); 
+  border-radius: var(--border-radius-btn); 
 }
 
 .btn:hover,

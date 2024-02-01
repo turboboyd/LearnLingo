@@ -1,6 +1,5 @@
 import { languages, levels, prices } from './DataFlter';
 import css from './Filter.module.css';
-
 import Select from 'react-select';
 import { selectRandomStyle } from '../../redux/auth/authSelectors';
 import { useSelector } from 'react-redux';
@@ -54,7 +53,9 @@ export default function Filter({
   return (
     <div className={css.filter}>
       <div className="">
-        <label htmlFor="levels">Level of knowledge</label>
+        <label className={css.label} htmlFor="levels">
+          Level of knowledge
+        </label>
         <Select
           aria-label="Level of knowledge"
           className={css.levels}
@@ -67,7 +68,9 @@ export default function Filter({
         />
       </div>
       <div className="">
-        <label htmlFor="languages">Languages</label>
+        <label className={css.label} htmlFor="languages">
+          Languages
+        </label>
         <Select
           aria-label="Languages"
           className={css.levels}
@@ -80,7 +83,9 @@ export default function Filter({
         />
       </div>
       <div>
-        <label htmlFor="price">Price</label>
+        <label className={css.label} htmlFor="price">
+          Price
+        </label>
         <Select
           aria-label="Price"
           isSearchable={false}
