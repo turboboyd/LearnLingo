@@ -27,7 +27,6 @@
 
 .btn {
   padding: 16px 88px;
-  border-radius: var(--border-radius-btn);
   border: none;
   background-color: var(--color-btn);
   transition: background-color 0.3s ease;
