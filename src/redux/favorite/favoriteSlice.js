@@ -21,11 +21,14 @@ const favoritesSlice = createSlice({
         teacher => teacher.id !== action.payload
       );
     },
+    clearFavorites: state => {
+      state.favorites = [];
+    },
   },
   extraReducers: builder => {
     builder.addCase(fetchFavorites.fulfilled, handleFulfilledFavorites);
   },
 });
-export const { addFavorite, removeFavorite } = favoritesSlice.actions;
+export const { addFavorite, removeFavorite, clearFavorites } = favoritesSlice.actions;
 
 export const favoritesReducer = favoritesSlice.reducer;

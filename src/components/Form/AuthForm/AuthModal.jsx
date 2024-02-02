@@ -81,14 +81,15 @@ const AuthForm = ({ modalContent, isModal }) => {
 
           <p className={css.text}>
             {isLogin ? "You don't have an account" : 'I have an account'}{' '}
-            <span
+            <button
+              className={css.btn_login}	
               style={{
                 color: randomStyle.btn,
               }}
               onClick={toggleMode}
             >
               {isLogin ? 'Sing Up' : 'Sing In'}
-            </span>
+            </button>
           </p>
           <BtnForm btnTitle={btnTitle} isSubmitting={isSubmitting} />
           <GoogleButton handleLogin={handleLogin} />

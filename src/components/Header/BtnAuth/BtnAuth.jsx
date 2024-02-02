@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../../redux/auth/authOperation';
 import useModal from 'hooks/useModal';
 import sprite from 'images/InlineSprite.svg';
+import { clearFavorites } from '../../../redux/favorite/favoriteSlice';
 
 export default function BtnAuth() {
   const dispatch = useDispatch();
@@ -13,15 +14,16 @@ export default function BtnAuth() {
   const { user, IsAuthCheck } = useAuth();
   const handleLogout = () => {
     dispatch(logoutUser());
+    dispatch(clearFavorites());
   };
 
   return (
     <>
       {IsAuthCheck ? (
         <div className={css.list_btn}>
-          <p className={css.name}>Hallo {user.displayName}</p>{' '}
+          <p className={css.name}>Hello {user.displayName}</p>{' '}
           <button className={css.btn} onClick={handleLogout}>
-            logOut
+            Logout
           </button>
         </div>
       ) : (

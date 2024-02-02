@@ -10,7 +10,7 @@ const InputField = ({type, name, placeholder }) => (
       name={name}
       placeholder={placeholder}
     />
-    <ErrorMessage name={name} component="div" />
+    <ErrorMessage className={css.error}  name={name} component="div" />
   </>
 );
 
