@@ -46,9 +46,19 @@ Because I wanted to create something awesome!
 
 
 ## Project Developer
-- [Denis Daniv]
+- Denis Daniv
 Contact information for the project developer:
-- [Telegram](https://t.me/turbo_boyd)
-- [LinkedIn](https://www.linkedin.com/in/denis-daniv/)
-- [WhatsApp]
-
+<p align="left"> 
+<a href="https://www.github.com/turboboyd" target="_blank" rel="noreferrer"> <picture> <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github-dark.svg" /> <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" /> <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" width="32" height="32" /> </picture> </a> 
+<a href="https://www.linkedin.com/in/denisdaniv" target="_blank" rel="noreferrer"> <picture> <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin-dark.svg" /> <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin.svg" /> <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin.svg" width="32" height="32" /> </picture> </a>
+<a href="https://t.me/turbo_boyd" target="_blank" rel="noreferrer"> 
+<picture> 
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="32" height="32" /> 
+</picture> 
+</a>
+<a href="mailto:denisdaniv1@gmail.com" target="_blank" rel="noreferrer"> 
+<picture> 
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" width="32" height="32" /> 
+</picture> 
+</a>
+</p>
