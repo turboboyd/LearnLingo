@@ -34,6 +34,7 @@
     -webkit-border-radius: var(--border-radius-btn);
   -moz-border-radius: var(--border-radius-btn); 
   border-radius: var(--border-radius-btn); 
+    color: #121417;
 }
 
 .btn:hover,
