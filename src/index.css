@@ -20,11 +20,10 @@ body {
   margin: 0;
   padding: 0;
 
-  color: var(--dark-color, #121417);
+  color: var(#121417, --dark-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Roboto', sans-serif;
-
 }
 
 img {
@@ -64,5 +63,5 @@ button {
 }
 
 .active {
-  color: var(--activeColor)
+  color: var(--activeColor);
 }

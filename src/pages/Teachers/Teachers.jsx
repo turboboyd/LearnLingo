@@ -4,17 +4,20 @@ import Filter from 'components/Filter/Filter';
 import TeacherCard from 'components/TeacherCard/TeacherCard';
 import Section from 'components/Section/Section';
 import Container from 'components/Container/Container';
-import { auth} from 'server/firebaseConfig.js';
 import { useDispatch } from 'react-redux';
 import { fetchTeachers } from '../../redux/teacher/teacherOperation';
 import { fetchFavorites } from '../../redux/favorite/favoriteOperation';
 import useTeachers from 'hooks/useTeachers';
 import { useLoadMore } from 'hooks/useLoadMore';
 import useUpdateFavorites from 'hooks/useUpdateFavorites';
+import css from './Teachers.module.css';
+import useAuth from 'hooks/useAuth';
+
 
 export default function Teachers() {
   const dispatch = useDispatch();
-  const user = auth.currentUser;
+  const { user, } = useAuth();
+  
   const { updateFavorites, isFavoriteBtn } = useUpdateFavorites();
   const { teachers, status } = useTeachers();
   const [filteredTeachers, setFilteredTeachers] = useState(teachers);
@@ -45,7 +48,7 @@ export default function Teachers() {
   return (
     <Section>
       <Container>
-        <h1>Teachers</h1>
+        <h1 className={css.title}>Teachers</h1>
         <Filter
           teachers={teachers}
           setFilteredTeachers={setFilteredTeachers}

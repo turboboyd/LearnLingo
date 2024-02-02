@@ -5,7 +5,6 @@ export const handleFulfilledRegistration = (state, { payload }) => {
   state.user.uid = payload.uid;
   state.token = payload.accessToken;
   state.isLoading = false;
-  // state.isRefreshing = false;
   state.isAuthCheck = true;
   state.status = 'fulfilled';
 };
@@ -16,7 +15,6 @@ export const handleFulfilledLogin = (state, { payload }) => {
   state.user.uid = payload.uid;
   state.token = payload.accessToken;
   state.isLoading = false;
-  // state.isRefreshing = false;
   state.isAuthCheck = true;
   state.status = 'fulfilled';
 };
@@ -28,7 +26,6 @@ export const handleFulfilledCurrentUser = (state, { payload }) => {
   state.user.uid = payload.uid;
   state.token = payload.accessToken;
   state.isLoading = false;
-  // state.isRefreshing = false;
   state.isAuthCheck = true;
   state.status = 'fulfilled';
 };
@@ -40,7 +37,6 @@ export const handleFulfilledLogOut = state => {
   state.token = null;
   state.isVerify = false;
   state.isLoading = false;
-  // state.isRefreshing = false;
   state.error = null;
   state.isAuthCheck = false;
 };
@@ -66,7 +62,6 @@ export const handleAuthorizationGoogle = (state, { payload }) => {
   state.user.uid = payload.uid;
   state.token = payload.accessToken;
   state.isLoading = false;
-  // state.isRefreshing = false;
   state.isAuthCheck = true;
   state.status = 'fulfilled';
 };

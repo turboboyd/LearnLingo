@@ -16,3 +16,8 @@
 .text{
   margin-bottom: 40px;
 }
+
+.btn_login{
+  border: none;
+  background: transparent;
+}
