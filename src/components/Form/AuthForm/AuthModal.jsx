@@ -42,7 +42,7 @@ const AuthForm = ({ modalContent, isModal }) => {
     }
   };
   const handleLogin = async () => {
-    const resultAction = await dispatch(authorizationGoogle());
+    await dispatch(authorizationGoogle());
   };
   useEffect(() => {
     if (IsAuthCheck) {
