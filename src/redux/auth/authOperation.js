@@ -12,6 +12,28 @@ import {
 
 const googleAuthProvider = new GoogleAuthProvider();
 
+
+const getAuthErrorMessage = error => {
+  switch (error?.code) {
+    case 'auth/invalid-credential':
+    case 'auth/user-not-found':
+    case 'auth/wrong-password':
+      return 'Email or password is incorrect. Please check your credentials and try again.';
+    case 'auth/email-already-in-use':
+      return 'An account with this email already exists. Please log in instead.';
+    case 'auth/weak-password':
+      return 'Password should be at least 6 characters.';
+    case 'auth/invalid-email':
+      return 'Please enter a valid email address.';
+    case 'auth/popup-closed-by-user':
+      return 'Google sign-in was closed before completion.';
+    case 'auth/network-request-failed':
+      return 'Network error. Please check your connection and try again.';
+    default:
+      return 'Authentication failed. Please try again.';
+  }
+};
+
 export const registrationUser = createAsyncThunk(
   'user/registrationUser',
   async ({ name, email, password }, { rejectWithValue }) => {
@@ -33,7 +55,7 @@ export const registrationUser = createAsyncThunk(
         accessToken: userCredential.user.accessToken,
       };
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(getAuthErrorMessage(error));
     }
   }
 );
@@ -54,7 +76,7 @@ export const loginUser = createAsyncThunk(
         accessToken: userCredential.user.accessToken,
       };
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(getAuthErrorMessage(error));
     }
   }
 );
@@ -79,7 +101,7 @@ export const currentUser = createAsyncThunk(
         });
       });
     } catch (error) {
-      throw rejectWithValue(error.message);
+      return rejectWithValue(getAuthErrorMessage(error));
     }
   }
 );
@@ -90,7 +112,7 @@ export const logoutUser = createAsyncThunk(
     try {
       await signOut(auth);
     } catch (error) {
-      throw rejectWithValue(error.message);
+      return rejectWithValue(getAuthErrorMessage(error));
     }
   }
 );
@@ -108,7 +130,7 @@ export const authorizationGoogle = createAsyncThunk(
       };
     } catch (error) {
       console.error('Login error:', error.message);
-      return rejectWithValue(error.message);
+      return rejectWithValue(getAuthErrorMessage(error));
     }
   }
 );

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectRandomStyle } from '../../../redux/auth/authSelectors';
 import PropTypes from 'prop-types';
 
-const BtnForm = ({ btnTitle }) => {
+const BtnForm = ({ btnTitle, disabled = false }) => {
   const randomStyle = useSelector(selectRandomStyle);
   return (
     <button
@@ -13,7 +13,7 @@ const BtnForm = ({ btnTitle }) => {
       }}
       className={css.btn}
       type="submit"
-      
+      disabled={disabled}
     >
       {btnTitle}
     </button>
@@ -22,6 +22,7 @@ const BtnForm = ({ btnTitle }) => {
 
 BtnForm.propTypes = {
   btnTitle: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default BtnForm;

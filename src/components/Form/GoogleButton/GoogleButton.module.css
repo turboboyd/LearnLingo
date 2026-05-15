@@ -24,3 +24,8 @@
   width: 30px;
   height: 30px;
 }
+
+.google_btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}

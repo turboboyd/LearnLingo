@@ -50,6 +50,10 @@ export const authSlice = createSlice({
     setRandomStyle: (state, action) => {
       state.randomStyle = action.payload;
     },
+    clearAuthError: state => {
+      state.error = null;
+      state.status = null;
+    },
   },
   extraReducers: builder => {
     builder
@@ -67,5 +71,7 @@ export const authSlice = createSlice({
 
 
 
+
+export const { clearAuthError } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
