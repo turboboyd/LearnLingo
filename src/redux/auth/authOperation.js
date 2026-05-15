@@ -12,9 +12,10 @@ import {
 
 const googleAuthProvider = new GoogleAuthProvider();
 
+export const getAuthErrorMessage = error => {
+  const code = error?.code;
 
-const getAuthErrorMessage = error => {
-  switch (error?.code) {
+  switch (code) {
     case 'auth/invalid-credential':
     case 'auth/user-not-found':
     case 'auth/wrong-password':
@@ -29,13 +30,23 @@ const getAuthErrorMessage = error => {
       return 'Google sign-in was closed before completion.';
     case 'auth/network-request-failed':
       return 'Network error. Please check your connection and try again.';
+    case 'auth/api-key-not-valid.-please-pass-a-valid-api-key.':
+    case 'auth/invalid-api-key':
+      return 'Authentication is not configured correctly. Please check the Firebase environment variables.';
     default:
-      return 'Authentication failed. Please try again.';
+      return error?.message || 'Authentication failed. Please try again.';
   }
 };
 
+const mapUser = user => ({
+  displayName: user.displayName,
+  email: user.email,
+  uid: user.uid,
+  accessToken: user.accessToken,
+});
+
 export const registrationUser = createAsyncThunk(
-  'user/registrationUser',
+  'auth/registrationUser',
   async ({ name, email, password }, { rejectWithValue }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -48,12 +59,7 @@ export const registrationUser = createAsyncThunk(
         displayName: name,
       });
 
-      return {
-        displayName: userCredential.user.displayName,
-        email: userCredential.user.email,
-        uid: userCredential.user.uid,
-        accessToken: userCredential.user.accessToken,
-      };
+      return mapUser(userCredential.user);
     } catch (error) {
       return rejectWithValue(getAuthErrorMessage(error));
     }
@@ -69,12 +75,8 @@ export const loginUser = createAsyncThunk(
         email,
         password
       );
-      return {
-        displayName: userCredential.user.displayName,
-        email: userCredential.user.email,
-        uid: userCredential.user.uid,
-        accessToken: userCredential.user.accessToken,
-      };
+
+      return mapUser(userCredential.user);
     } catch (error) {
       return rejectWithValue(getAuthErrorMessage(error));
     }
@@ -85,20 +87,18 @@ export const currentUser = createAsyncThunk(
   'auth/currentUser',
   async (_, { rejectWithValue }) => {
     try {
-      return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, currentUser => {
-          if (currentUser) {
-            const user = {
-              displayName: currentUser.displayName,
-              email: currentUser.email,
-              uid: currentUser.uid,
-              accessToken: currentUser.accessToken,
-            };
-            resolve(user);
-          } else {
-            return reject('Пользователь не аутентифицирован');
+      return await new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(
+          auth,
+          user => {
+            unsubscribe();
+            resolve(user ? mapUser(user) : null);
+          },
+          error => {
+            unsubscribe();
+            reject(error);
           }
-        });
+        );
       });
     } catch (error) {
       return rejectWithValue(getAuthErrorMessage(error));
@@ -122,14 +122,8 @@ export const authorizationGoogle = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const userCredential = await signInWithPopup(auth, googleAuthProvider);
-      return {
-        displayName: userCredential.user.displayName,
-        email: userCredential.user.email,
-        uid: userCredential.user.uid,
-        accessToken: userCredential.user.accessToken,
-      };
+      return mapUser(userCredential.user);
     } catch (error) {
-      console.error('Login error:', error.message);
       return rejectWithValue(getAuthErrorMessage(error));
     }
   }

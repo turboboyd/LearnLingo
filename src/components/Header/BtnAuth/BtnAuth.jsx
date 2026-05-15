@@ -22,7 +22,7 @@ export default function BtnAuth() {
       {IsAuthCheck ? (
         <div className={css.list_btn}>
           <p className={css.name}>Hello {user.displayName}</p>{' '}
-          <button className={css.btn} onClick={handleLogout}>
+          <button type="button" className={css.btn} onClick={handleLogout}>
             Logout
           </button>
         </div>
@@ -30,6 +30,7 @@ export default function BtnAuth() {
         <ul className={css.list_btn}>
           <li>
             <button
+              type="button"
               className={css.btn_login}
               onClick={() => openModal('login')}
             >
@@ -38,6 +39,7 @@ export default function BtnAuth() {
           </li>
           <li>
             <button
+              type="button"
               className={css.btn}
               onClick={() => openModal('registration')}
             >
@@ -47,13 +49,14 @@ export default function BtnAuth() {
         </ul>
       )}
       {IsAuthCheck ? (
-        <button className={css.btn_login_mob} onClick={handleLogout}>
+        <button type="button" className={css.btn_login_mob} onClick={handleLogout}>
           <svg className={css.icon_book}>
             <use xlinkHref={`${sprite}#logout`} />
           </svg>
         </button>
       ) : (
         <button
+          type="button"
           className={css.btn_login_mob}
           onClick={() => openModal('login')}
         >

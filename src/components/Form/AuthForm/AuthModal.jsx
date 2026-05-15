@@ -10,7 +10,6 @@ import {
   loginUser,
   authorizationGoogle,
 } from '../../../redux/auth/authOperation';
-import useAuth from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import Title from 'components/Form/Title/Title';
 import BtnForm from 'components/Form/BtnForm/BtnForm';
@@ -24,13 +23,21 @@ import {
 } from '../../../redux/auth/authSelectors';
 import { clearAuthError } from '../../../redux/auth/authSlice';
 
+const getReadableSubmitError = error => {
+  if (typeof error === 'string') {
+    return error;
+  }
+
+  return error?.message || 'Authentication failed. Please try again.';
+};
+
 const AuthForm = ({ modalContent, isModal }) => {
   const dispatch = useDispatch();
   const randomStyle = useSelector(selectRandomStyle);
   const authError = useSelector(selectError);
   const isAuthLoading = useSelector(selectIsLoading);
-  const { IsAuthCheck } = useAuth();
   const [isLogin, setIsLogin] = useState(modalContent === 'login');
+  const [submitError, setSubmitError] = useState(null);
 
   const initialValue = isLogin
     ? { email: '', password: '' }
@@ -41,56 +48,60 @@ const AuthForm = ({ modalContent, isModal }) => {
     : 'Create an account to save favorite tutors and book a trial lesson.';
   const validSchema = isLogin ? loginSchema : registrationSchema;
   const btnTitle = isLogin ? 'Log In' : 'Sign Up';
+  const visibleError = submitError || authError;
 
   const onSubmit = async (values, { setSubmitting }) => {
+    setSubmitError(null);
+    dispatch(clearAuthError());
+
     try {
       if (isLogin) {
         await dispatch(loginUser(values)).unwrap();
       } else {
         await dispatch(registrationUser(values)).unwrap();
       }
+
+      isModal();
     } catch (error) {
-      // The error is already stored in Redux and rendered below.
-      // Keeping the modal open is intentional for failed login/registration attempts.
+      setSubmitError(getReadableSubmitError(error));
     } finally {
       setSubmitting(false);
     }
   };
 
   const handleGoogleLogin = async () => {
+    setSubmitError(null);
+    dispatch(clearAuthError());
+
     try {
       await dispatch(authorizationGoogle()).unwrap();
+      isModal();
     } catch (error) {
-      // Keep the modal open and show a readable error instead of navigating/reloading.
+      setSubmitError(getReadableSubmitError(error));
     }
   };
 
   useEffect(() => {
-    if (IsAuthCheck) {
-      isModal();
-    }
-  }, [IsAuthCheck, isModal]);
-
-  useEffect(() => {
+    setSubmitError(null);
     dispatch(clearAuthError());
   }, [dispatch, isLogin]);
 
   const toggleMode = event => {
     event.preventDefault();
+    setSubmitError(null);
     dispatch(clearAuthError());
     setIsLogin(prev => !prev);
   };
 
   return (
     <Formik
-      className={css.form}
       initialValues={initialValue}
       validationSchema={validSchema}
       onSubmit={onSubmit}
       enableReinitialize
     >
       {({ isSubmitting }) => (
-        <Form noValidate>
+        <Form className={css.form} noValidate>
           <div className={css.title_wrap}>
             <Title title={title} text={text} />
           </div>
@@ -107,7 +118,7 @@ const AuthForm = ({ modalContent, isModal }) => {
             />
           </div>
 
-          {authError && <p className={css.error}>{authError}</p>}
+          {visibleError && <p className={css.error}>{visibleError}</p>}
 
           <p className={css.text}>
             {isLogin ? "You don't have an account" : 'I have an account'}{' '}
@@ -118,6 +129,7 @@ const AuthForm = ({ modalContent, isModal }) => {
                 color: randomStyle.btn,
               }}
               onClick={toggleMode}
+              disabled={isSubmitting || isAuthLoading}
             >
               {isLogin ? 'Sign Up' : 'Sign In'}
             </button>

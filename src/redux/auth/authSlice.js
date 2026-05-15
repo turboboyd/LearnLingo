@@ -14,18 +14,8 @@ import {
   handleAuthorizationGoogle,
   handlePending,
   handleRejected,
-  
-//   handleFulfilledVerify,
-//   handleVerifyRejected,
-//   handleFulfilledUpdateProfileSettings,
-//   handlePendingUpdateProfileSettings,
-//   handleRejectedUpdateProfileSettings,
-//   handlePendingRefresh,
-//   handleFulfilledResetEmail,
-//   handleFulfilledResetPassword,
 } from './authReducer';
 import { operationsType } from './authOperationsType';
-
 
 const initialState = {
   user: {
@@ -37,7 +27,7 @@ const initialState = {
   token: '',
   isVerify: false,
   isAuthCheck: false,
-  isLoading: true,
+  isLoading: false,
   isRefreshing: false,
   error: null,
   randomStyle: '',
@@ -62,15 +52,10 @@ export const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, handleFulfilledLogOut)
       .addCase(currentUser.fulfilled, handleFulfilledCurrentUser)
       .addCase(authorizationGoogle.fulfilled, handleAuthorizationGoogle)
-      // .addCase(refreshUser.pending, handlePendingRefresh)
-      //   .addCase(verifyUser.rejected, handleVerifyRejected)
       .addMatcher(isAnyOf(...operationsType('pending')), handlePending)
       .addMatcher(isAnyOf(...operationsType('rejected')), handleRejected);
   },
 });
-
-
-
 
 export const { clearAuthError } = authSlice.actions;
 
