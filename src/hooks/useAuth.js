@@ -5,12 +5,14 @@ import {
   selectStatus,
   selectError,
   selectIsAuthCheck,
+  selectIsRefreshing,
 } from '../redux/auth/authSelectors';
 
 const useAuth = () => {
   const user = useSelector(selectUser);
   const IsAuthCheck = useSelector(selectIsAuthCheck);
   const isLoading = useSelector(selectIsLoading);
+  const isRefreshing = useSelector(selectIsRefreshing);
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
 
@@ -18,6 +20,7 @@ const useAuth = () => {
     user,
     IsAuthCheck,
     isLoading,
+    isRefreshing,
     status,
     error,
   };

@@ -2,29 +2,25 @@ import { topicsArray } from 'components/Form/Topics/topicsArray';
 import * as Yup from 'yup';
 
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
-
 const emailValidation = Yup.string()
   .matches(emailRegex, 'Invalid email format')
   .required('Required field');
 
-const passwordValidation = Yup.string()
-  .min(8, 'Password must be at least 8 characters long')
-  .matches(
-    passwordRegex,
-    'Password must contain at least one uppercase letter, one lowercase letter, and one number'
-  )
+const registrationPasswordValidation = Yup.string()
+  .min(6, 'Password must be at least 6 characters long')
   .required('Required field');
+
+const loginPasswordValidation = Yup.string().required('Required field');
 
 export const registrationSchema = Yup.object().shape({
   name: Yup.string().required('Required field'),
   email: emailValidation,
-  password: passwordValidation,
+  password: registrationPasswordValidation,
 });
 
 export const loginSchema = Yup.object().shape({
   email: emailValidation,
-  password: passwordValidation,
+  password: loginPasswordValidation,
 });
 
 export const trialLessonSchema = Yup.object({

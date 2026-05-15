@@ -73,9 +73,15 @@ const TeacherCard = ({
         />
       </div>
       {isModalOpen && (
-        <BasicModal isModal={closeModal}>
+        <BasicModal
+          isModal={closeModal}
+          closeOnOverlay={modalContent !== 'registration'}
+        >
           {modalContent === 'registration' && (
-            <AuthForm modalContent="registration" isModal={closeModal} />
+            <AuthForm
+              modalContent="registration"
+              onAuthSuccess={closeModal}
+            />
           )}
           {modalContent === 'Book trial lesson' && (
             <TrialLessonForm closeModal={closeModal} teacher={teacher} />

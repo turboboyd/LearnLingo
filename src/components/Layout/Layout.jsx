@@ -6,9 +6,9 @@ import Loader from 'components/Loader/Loader';
 import Container from 'components/Container/Container';
 import useAuth from 'hooks/useAuth';
 export default function Layout() {
-  const { isLoading } = useAuth();
+  const { isRefreshing } = useAuth();
 
-  if (isLoading) {
+  if (isRefreshing) {
     return <Loader/>;
   }
 

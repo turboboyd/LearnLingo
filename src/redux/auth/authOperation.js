@@ -17,6 +17,7 @@ export const getAuthErrorMessage = error => {
 
   switch (code) {
     case 'auth/invalid-credential':
+    case 'auth/invalid-login-credentials':
     case 'auth/user-not-found':
     case 'auth/wrong-password':
       return 'Email or password is incorrect. Please check your credentials and try again.';
@@ -26,6 +27,8 @@ export const getAuthErrorMessage = error => {
       return 'Password should be at least 6 characters.';
     case 'auth/invalid-email':
       return 'Please enter a valid email address.';
+    case 'auth/too-many-requests':
+      return 'Too many unsuccessful login attempts. Please wait a moment and try again.';
     case 'auth/popup-closed-by-user':
       return 'Google sign-in was closed before completion.';
     case 'auth/network-request-failed':
@@ -51,12 +54,12 @@ export const registrationUser = createAsyncThunk(
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email,
+        email.trim(),
         password
       );
 
       await updateProfile(userCredential.user, {
-        displayName: name,
+        displayName: name.trim(),
       });
 
       return mapUser(userCredential.user);
@@ -72,7 +75,7 @@ export const loginUser = createAsyncThunk(
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        email,
+        email.trim(),
         password
       );
 

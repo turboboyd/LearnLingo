@@ -3,6 +3,7 @@ import BasicModal from 'components/Modal/BasicModal';
 import AuthModal from 'components/Form/AuthForm/AuthModal';
 import useAuth from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../../redux/auth/authOperation';
 import useModal from 'hooks/useModal';
 import sprite from 'images/InlineSprite.svg';
@@ -10,11 +11,18 @@ import { clearFavorites } from '../../../redux/favorite/favoriteSlice';
 
 export default function BtnAuth() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isModalOpen, modalContent, openModal, closeModal } = useModal();
   const { user, IsAuthCheck } = useAuth();
+
   const handleLogout = () => {
     dispatch(logoutUser());
     dispatch(clearFavorites());
+  };
+
+  const handleAuthSuccess = () => {
+    closeModal();
+    navigate('/teachers', { replace: true });
   };
 
   return (
@@ -67,8 +75,14 @@ export default function BtnAuth() {
       )}
 
       {isModalOpen && (
-        <BasicModal isModal={closeModal}>
-          <AuthModal modalContent={modalContent} isModal={closeModal} />
+        <BasicModal
+          isModal={closeModal}
+          closeOnOverlay={false}
+        >
+          <AuthModal
+            modalContent={modalContent}
+            onAuthSuccess={handleAuthSuccess}
+          />
         </BasicModal>
       )}
     </>

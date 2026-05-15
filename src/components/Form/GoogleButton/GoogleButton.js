@@ -8,11 +8,17 @@ import PropTypes from 'prop-types';
 const GoogleButton = ({ handleLogin, disabled = false }) => {
   const randomStyle = useSelector(selectRandomStyle);
 
+  const handleClick = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    handleLogin(event);
+  };
+
   return (
     <button
       type="button"
       className={styles.google_btn}
-      onClick={handleLogin}
+      onClick={handleClick}
       disabled={disabled}
       style={{
         '--active-color-btn': randomStyle.background,
@@ -21,7 +27,7 @@ const GoogleButton = ({ handleLogin, disabled = false }) => {
       <svg className={styles.icon_google}>
         <use xlinkHref={`${sprite}#google`} />
       </svg>
-       Sign in with Google
+      Sign in with Google
     </button>
   );
 };

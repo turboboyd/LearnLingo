@@ -14,8 +14,19 @@ const setAuthenticatedUser = (state, payload) => {
   state.user.uid = payload.uid;
   state.token = payload.accessToken;
   state.isLoading = false;
+  state.isRefreshing = false;
   state.isAuthCheck = true;
   state.status = 'fulfilled';
+};
+
+const isCurrentUserAction = type => type.startsWith('auth/currentUser/');
+
+const isCredentialSubmitAction = type => {
+  return (
+    type.startsWith('auth/loginUser/') ||
+    type.startsWith('auth/registrationUser/') ||
+    type.startsWith('auth/authorizationGoogle/')
+  );
 };
 
 export const handleFulfilledRegistration = (state, { payload }) => {
@@ -28,6 +39,7 @@ export const handleFulfilledLogin = (state, { payload }) => {
 
 export const handleFulfilledCurrentUser = (state, { payload }) => {
   state.isLoading = false;
+  state.isRefreshing = false;
   state.status = 'fulfilled';
 
   if (!payload) {
@@ -42,24 +54,41 @@ export const handleFulfilledCurrentUser = (state, { payload }) => {
 export const handleFulfilledLogOut = state => {
   resetUser(state);
   state.isLoading = false;
+  state.isRefreshing = false;
   state.error = null;
   state.status = 'fulfilled';
 };
 
-export const handlePending = state => {
-  state.isLoading = true;
+export const handlePending = (state, { type }) => {
   state.error = null;
   state.status = 'pending';
+
+  if (isCurrentUserAction(type)) {
+    state.isRefreshing = true;
+    state.isLoading = false;
+    return;
+  }
+
+  state.isLoading = true;
+
+  if (isCredentialSubmitAction(type)) {
+    resetUser(state);
+  }
 };
 
 export const handleRejected = (state, { payload, type }) => {
   state.isLoading = false;
+  state.isRefreshing = false;
   state.status = 'rejected';
 
   if (type === 'auth/currentUser/rejected') {
     resetUser(state);
     state.error = null;
     return;
+  }
+
+  if (isCredentialSubmitAction(type)) {
+    resetUser(state);
   }
 
   state.error = payload || 'Authentication failed. Please try again.';
