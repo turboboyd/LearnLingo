@@ -87,7 +87,7 @@ const AuthForm = ({ modalContent, isModal }) => {
               }}
               onClick={toggleMode}
             >
-              {isLogin ? 'Sing Up' : 'Sing In'}
+              {isLogin ? 'Sign Up' : 'Sign In'}
             </button>
           </p>
           <BtnForm btnTitle={btnTitle} isSubmitting={isSubmitting} />

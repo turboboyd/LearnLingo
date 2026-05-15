@@ -16,10 +16,10 @@ export const TeacherStats = ({
           <svg className={css.icon_book}>
             <use xlinkHref={`${sprite}#book`} />
           </svg>
-          <p>Lessons online</p>
+          <p>Online lessons</p>
         </li>
         <li className={css.static_after}>
-          <p>Lessons done: {teacher.lessons_done}</p>
+          <p>Lessons completed: {teacher.lessons_done}</p>
         </li>
         <li className={`${css.rating} ${css.static_after}`}>
           <svg className={css.icon}>
@@ -28,10 +28,8 @@ export const TeacherStats = ({
           <p>Rating: {teacher.rating}</p>
         </li>
         <li>
-          {' '}
           <p>
-            Price / 1 hour:{' '}
-            <span className={css.price}>{teacher.price_per_hour}$</span>
+            <span className={css.price}>${teacher.price_per_hour}</span> / hour
           </p>
         </li>
       </ul>

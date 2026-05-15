@@ -54,10 +54,10 @@ export default function Filter({
     <div className={css.filter}>
       <div className="">
         <label className={css.label} htmlFor="levels">
-          Level of knowledge
+          Language level
         </label>
         <Select
-          aria-label="Level of knowledge"
+          aria-label="Language level"
           className={css.levels}
           styles={customStyles(randomStyle)}
           defaultValue={levels[0]}

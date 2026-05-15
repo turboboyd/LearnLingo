@@ -86,33 +86,19 @@ The frontend does not use a custom REST API. Data is fetched directly from Fireb
 
 ## Screenshots
 
-### Home page
+Add screenshots to an `assets/screenshots/` folder and reference them here.
 
-![LearnLingo home page](assets/screenshots/home-desktop.png)
+Recommended screenshots:
 
-### Teacher catalogue with filters
-
+```md
+![Home page](assets/screenshots/home-desktop.png)
 ![Teacher catalogue with filters](assets/screenshots/teachers-filters-desktop.png)
-
-### Expanded teacher card with reviews
-
-![Expanded teacher card with reviews](assets/screenshots/teacher-card-expanded.png)
-
-### Authentication modal
-
+![Teacher card expanded with reviews](assets/screenshots/teacher-card-expanded.png)
 ![Authentication modal](assets/screenshots/auth-modal.png)
-
-### Favorites page
-
-![Saved tutors page](assets/screenshots/favorites-authenticated.png)
-
-### Trial lesson request modal
-
-![Trial lesson request modal](assets/screenshots/trial-lesson-modal.png)
-
-### Mobile teacher catalogue
-
+![Favorites page](assets/screenshots/favorites-authenticated.png)
+![Trial lesson form](assets/screenshots/trial-lesson-modal.png)
 ![Mobile teacher catalogue](assets/screenshots/teachers-mobile.png)
+```
 
 ## Installation
 

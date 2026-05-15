@@ -5,7 +5,7 @@ import { fetchFavorites } from './favoriteOperation';
 const initialState = {
   favorites: [],
   error: null,
-  isLoading: true,
+  isLoading: false,
   status: null,
 };
 
@@ -23,12 +23,27 @@ const favoritesSlice = createSlice({
     },
     clearFavorites: state => {
       state.favorites = [];
+      state.error = null;
+      state.isLoading = false;
+      state.status = null;
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchFavorites.fulfilled, handleFulfilledFavorites);
+    builder
+      .addCase(fetchFavorites.pending, state => {
+        state.error = null;
+        state.isLoading = true;
+        state.status = 'pending';
+      })
+      .addCase(fetchFavorites.fulfilled, handleFulfilledFavorites)
+      .addCase(fetchFavorites.rejected, (state, { payload }) => {
+        state.error = payload || 'Failed to load saved tutors';
+        state.isLoading = false;
+        state.status = 'rejected';
+      });
   },
 });
+
 export const { addFavorite, removeFavorite, clearFavorites } = favoritesSlice.actions;
 
 export const favoritesReducer = favoritesSlice.reducer;

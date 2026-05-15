@@ -8,6 +8,7 @@ import { selectRandomStyle } from '../../redux/auth/authSelectors';
 export default function HeroTitleWrap() {
   const { isModalOpen, openModal, closeModal } = useModal();
   const randomStyle = useSelector(selectRandomStyle);
+
   return (
     <div className={css.wrap_title}>
       <h1 className={css.title}>
@@ -21,9 +22,8 @@ export default function HeroTitleWrap() {
         tutors
       </h1>
       <p className={css.text}>
-        Embark on an Exciting Language Journey with Expert Language Tutors:
-        Elevate your language proficiency to new heights by connecting with
-        highly qualified and experienced tutors.
+        Find experienced language tutors, compare profiles, save favorites and
+        book a trial lesson in a few clicks.
       </p>
       <button
         className={`${css.btn} ${css[randomStyle.name]}`}
@@ -33,7 +33,7 @@ export default function HeroTitleWrap() {
         }}
         onClick={openModal}
       >
-        Get started
+        Find a tutor
       </button>
       {isModalOpen && (
         <BasicModal isModal={closeModal}>
